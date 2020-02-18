@@ -7,10 +7,11 @@ verify_ssl = true
 pylint = "*"
 
 [packages]
-dash = "==1.8.0"
+dash = "*"
 pandas = "*"
 sqlalchemy = "*"
 pymysql = "*"
+dash-bootstrap-components = "*"
 
 [requires]
 python_version = "3.7"

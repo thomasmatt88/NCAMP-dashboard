@@ -4,11 +4,14 @@ import dash_table
 import pandas as pd
 import dash_html_components as html
 import dash_core_components as dcc
+import dash_bootstrap_components as dbc
+from dash.dependencies import Input, Output, State
 
 from sqlalchemy import create_engine
 import pymysql
 
-app = dash.Dash(__name__)
+#app = dash.Dash(__name__)
+app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 db_connection_str = 'mysql+pymysql://root:root@localhost:3306/NCAMP'
 db_connection = create_engine(db_connection_str)
@@ -66,7 +69,7 @@ app.layout = html.Div([
             'fontWeight': 'bold'
         }
     ),
-    dcc.Checklist(
+    dcc.RadioItems(
         id = 'material-property-checklist', #need to reference for callback
         options = [
             {'label': 'F1tu', 'value': 'F1tu'},
@@ -92,6 +95,21 @@ app.layout = html.Div([
         sort_action = 'custom',
         sort_mode = 'single',
         sort_by = []
+    ),
+    html.Div(
+        [
+            dbc.Button("Open modal", id="open"),
+            dbc.Modal(
+                [
+                    dbc.ModalHeader("Header"),
+                    dbc.ModalBody("This is the content of the modal"),
+                    dbc.ModalFooter(
+                        dbc.Button("Close", id="close", className="ml-auto")
+                    ),
+                ],
+                id="modal",
+            ),
+        ]
     )
 ])
 
@@ -146,6 +164,15 @@ def update_material_property_table(property_value, sort_by, material_value):
     else:
         return dff[dff['id'].isin(value)].to_dict("rows")
     """
+@app.callback(
+    Output("modal", "is_open"),
+    [Input("open", "n_clicks"), Input("close", "n_clicks")],
+    [State("modal", "is_open")],
+)
+def toggle_modal(n1, n2, is_open):
+    if n1 or n2:
+        return not is_open
+    return is_open
 
 
 if __name__ == '__main__':
