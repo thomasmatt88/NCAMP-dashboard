@@ -29,7 +29,8 @@ df5 = df4
 df6 = pd.merge(df[['id', 'Material']], df1, how = 'inner', left_on = 'id', right_on = 'material_id')
 df6 = df6.drop(columns = ['id_x', 'id_y'])
 
-# add units header to df6
+# add units header to df and df6
+df = df.rename(columns = {"MOT": "MOT (°F)", "Tg": "Tg (°F)", "WetTg" :"WetTg(°F)", "FAW": "FAW (g/m^2)"})
 """
 header_tuples = [('Material', None), ('material_id', None), ('test_conditions_id', None), \
     ('F1tu', 'ksi'), ('F2tu', 'ksi'), ('E1t', 'msi'), ('F1cu', 'ksi'), \
@@ -44,6 +45,7 @@ df6 = df6.rename(columns  = {"F1tu": "F1tu (ksi)", "F2tu": "F2tu (ksi)", "E1t": 
 #this element will contain all our other elements 
 app.layout = html.Div([
     html.H1("NCAMP Table"),
+    html.H3("Select a Material"),
     dcc.Dropdown(
         id = 'material-dropdown', #need to reference for callback
         options=[
@@ -69,17 +71,34 @@ app.layout = html.Div([
             'fontWeight': 'bold'
         }
     ),
-    dcc.RadioItems(
-        id = 'material-property-checklist', #need to reference for callback
-        options = [
-            {'label': 'F1tu', 'value': 'F1tu'},
-            {'label': 'F2tu', 'value': 'F2tu'},
-            {'label': 'E1t', 'value': 'E1t'},
-            {'label': 'F1cu', 'value': 'F1cu'},
-            {'label': 'F2cu', 'value': 'F2cu'},
-            {'label': 'F12su', 'value': 'F12su'},
-            {'label': 'F31sbs', 'value': 'F31sbs'},
-            {'label': 'CPT', 'value': 'CPT'},
+    html.H3("Select a Filter"),
+    html.Div(
+        [
+            dbc.Button("Test Condition", id="open"),
+            dbc.Modal(
+                [
+                    dbc.ModalHeader("Filter properties by test condition."),
+                    dbc.ModalBody(
+                        dcc.Checklist(
+                            id = 'test-condition-checklist', #need to reference for callback
+                            options = [
+                                {'label': '-65°F, dry', 'value': 1},
+                                {'label': '70°F, dry', 'value': 2},
+                                {'label': '250°F, wet', 'value': 3},
+                                {'label': '250°F, dry', 'value': 4},
+                                {'label': '180°F, dry', 'value': 5},
+                                {'label': '180°F, wet', 'value': 6},
+                                {'label': '200°F, wet', 'value': 7}
+                            
+                            ]
+                        )
+                    ),
+                    dbc.ModalFooter(
+                        dbc.Button("Close", id="close", className="ml-auto")
+                    ),
+                ],
+                id="modal",
+            ),
         ]
     ),
     html.Div(
@@ -95,21 +114,6 @@ app.layout = html.Div([
         sort_action = 'custom',
         sort_mode = 'single',
         sort_by = []
-    ),
-    html.Div(
-        [
-            dbc.Button("Open modal", id="open"),
-            dbc.Modal(
-                [
-                    dbc.ModalHeader("Header"),
-                    dbc.ModalBody("This is the content of the modal"),
-                    dbc.ModalFooter(
-                        dbc.Button("Close", id="close", className="ml-auto")
-                    ),
-                ],
-                id="modal",
-            ),
-        ]
     )
 ])
 
@@ -133,16 +137,18 @@ def update_material_table(value, sort_by):
 
 @app.callback(
     Output('material-property-selection', 'children'),
-    [Input('material-property-checklist', 'value')])
+    [Input('test-condition-checklist', 'value')])
 def update_material_property_output(value):
     return 'You have selected "{}"'.format(value)
 
 @app.callback(
     Output('material-property-table', 'data'), #one output id can have one callback
-    [Input('material-property-checklist', 'value'),
+    [Input('test-condition-checklist', 'value'),
     Input('material-property-table', 'sort_by'),
     Input('material-dropdown', 'value')])
-def update_material_property_table(property_value, sort_by, material_value):
+def update_material_property_table(test_condition_value, sort_by, material_value):
+    print("test_condition_value ", test_condition_value)
+
     if len(sort_by):
         dff = df6.sort_values(
             sort_by[0]['column_id'],
@@ -153,17 +159,22 @@ def update_material_property_table(property_value, sort_by, material_value):
         # No sort is applied
         dff = df6
     
-    #dff = df6
+    #filter by material
     if material_value is None:
-        return dff[dff['material_id'] == material_value].drop(columns = ['material_id']).to_dict("rows") #one value at a time
+        #return dff[dff['material_id'] == material_value].drop(columns = ['material_id']).to_dict("rows") #one value at a time
+        dff = dff[dff['material_id'] == material_value].drop(columns = ['material_id']) #one value at a time
     else:
-        return dff[dff['material_id'].isin(material_value)].drop(columns = ['material_id']).to_dict("rows")
-    """
-    if value is None:
-        return dff[dff['id'] == value].to_dict("rows") #one value at a time
+        #return dff[dff['material_id'].isin(material_value)].drop(columns = ['material_id']).to_dict("rows")
+        dff = dff[dff['material_id'].isin(material_value)].drop(columns = ['material_id'])
+    
+    #filter by test condition
+    if test_condition_value is None:
+        return dff.to_dict("rows")
     else:
-        return dff[dff['id'].isin(value)].to_dict("rows")
-    """
+        test_condition_value = [int(i) for i in test_condition_value]
+        print("test_conditions series dtype", dff)
+        return dff[dff['test_conditions_id'].isin(test_condition_value)].to_dict("rows")
+    
 @app.callback(
     Output("modal", "is_open"),
     [Input("open", "n_clicks"), Input("close", "n_clicks")],
