@@ -26,6 +26,18 @@ df5 = df4
 df6 = pd.merge(df[['id', 'Material']], df1, how = 'inner', left_on = 'id', right_on = 'material_id')
 df6 = df6.drop(columns = ['id_x', 'id_y'])
 
+# add units header to df6
+"""
+header_tuples = [('Material', None), ('material_id', None), ('test_conditions_id', None), \
+    ('F1tu', 'ksi'), ('F2tu', 'ksi'), ('E1t', 'msi'), ('F1cu', 'ksi'), \
+        ('F2cu', 'ksi'), ('F12su', 'ksi'), ('F31sbs', 'ksi'), ('CPT', 'in/ply')]
+df6.columns = pd.MultiIndex.from_tuples(header_tuples)
+"""
+df6 = df6.rename(columns  = {"F1tu": "F1tu (ksi)", "F2tu": "F2tu (ksi)", "E1t": "E1t (msi)", \
+    "F1cu": "F1cu (ksi)", "F2cu": "F2cu (ksi)", "F12su": "F12su (ksi)", "F31sbs": "F31sbs (ksi)", \
+        "CPT": "CPT (in/ply)"})
+
+
 #this element will contain all our other elements 
 app.layout = html.Div([
     html.H1("NCAMP Table"),
@@ -50,11 +62,9 @@ app.layout = html.Div([
         id = 'material-table', #need to reference for callback
         columns = [{"name": i, "id": i} for i in df.drop(columns = 'id').columns], #don't need id column
         data = df.drop(columns = 'id').to_dict("rows"),
-        #columns = [{"name": i, "id": i} for i in df.columns], #don't need id column
-        #data = df.to_dict("rows"),
-        #sort_action = 'custom',
-        #sort_mode = 'single',
-        #sort_by = []
+        style_header = {
+            'fontWeight': 'bold'
+        }
     ),
     dcc.Checklist(
         id = 'material-property-checklist', #need to reference for callback
@@ -76,6 +86,9 @@ app.layout = html.Div([
         id = 'material-property-table', #need to reference for callback
         columns = [{"name": i, "id": i} for i in df6.drop(columns = ['material_id']).columns], #don't need id column
         data = df6.drop(columns = ['material_id']).to_dict("rows"),
+        style_header = {
+            'fontWeight': 'bold'
+        },
         sort_action = 'custom',
         sort_mode = 'single',
         sort_by = []
