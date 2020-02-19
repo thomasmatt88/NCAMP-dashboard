@@ -14,6 +14,7 @@ from dataframe import df, df6
 
 #app = dash.Dash(__name__)
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+server = app.server #need to add this line for heroku deployment
 
 #this element will contain all our other elements 
 app.layout = Layout
