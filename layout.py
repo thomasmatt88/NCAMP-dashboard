@@ -59,8 +59,8 @@ property_dropdown = dcc.Dropdown(
         options=[
         {'label': 'F1tu', 'value': 1},
         ],
-        placeholder="Select a material",
-        multi = False
+        placeholder="Select a material property",
+        multi = True
 )
 
 test_conditions_modal = html.Div(
@@ -90,6 +90,27 @@ test_conditions_modal = html.Div(
                     ),
                 ],
                 id="property_modal",
+            ),
+            dbc.Modal(
+                [
+                    dbc.ModalHeader("F1tu"),
+                    dbc.ModalBody(
+                        html.Div([
+                            dcc.RangeSlider(
+                                id='my-range-slider',
+                                min=df6['F1tu (ksi)'].min(),
+                                max=df6['F1tu (ksi)'].max(),
+                                step=1,
+                                value=[df6['F1tu (ksi)'].min(), df6['F1tu (ksi)'].max()]
+                            ),
+                            html.Div(id='output-container-range-slider')
+                        ])
+                    ),
+                    dbc.ModalFooter(
+                        dbc.Button("Close", color = "secondary", id="close_property_range_modal", className="ml-auto")
+                    ),
+                ],
+                id="property_range_modal",
             )
         ]
 )
@@ -105,6 +126,9 @@ Layout = html.Div([
     material_table,
     html.H3("Select a Filter"),
     test_conditions_modal, 
+    html.Div(
+        id = "test-condition-selection", #need to reference for callback
+    ),
     html.Div(
         id = "material-property-selection", #need to reference for callback
     ),
