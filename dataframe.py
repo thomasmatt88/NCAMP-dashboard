@@ -38,4 +38,4 @@ df6.columns = pd.MultiIndex.from_tuples(header_tuples)
 """
 df6 = df6.rename(columns  = {"F1tu": "F1tu (ksi)", "F2tu": "F2tu (ksi)", "E1t": "E1t (msi)", \
     "F1cu": "F1cu (ksi)", "F2cu": "F2cu (ksi)", "F12su": "F12su (ksi)", "F31sbs": "F31sbs (ksi)", \
-        "CPT": "CPT (in/ply)"})
+        "CPT": "CPT (in/ply)", "temperature": "Test Temperature (°F)", "environment": "Test Environment"})
