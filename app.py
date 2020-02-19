@@ -77,6 +77,7 @@ def update_material_property_table(test_condition_value, sort_by, material_value
             (property_range_value[0] < dff['F1tu (ksi)']) & (dff['F1tu (ksi)'] < property_range_value[1])
         ]
 
+
     #filter by test condition
     if test_condition_value is None:
         return dff.to_dict("rows")

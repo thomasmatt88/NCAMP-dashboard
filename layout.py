@@ -30,7 +30,7 @@ material_table = dash_table.DataTable(
 
 property_table = dash_table.DataTable(
         id = 'material-property-table', #need to reference for callback
-        columns = [{"name": i, "id": i} for i in df6.drop(columns = ['material_id']).columns], #don't need id column
+        columns = [{"name": i, "id": i} for i in df6.drop(columns = ['material_id', 'test_conditions_id']).columns], #don't need id column
         data = df6.drop(columns = ['material_id']).to_dict("rows"),
         style_header = {
             'fontWeight': 'bold'
