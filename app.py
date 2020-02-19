@@ -48,9 +48,12 @@ def update_material_property_output(value):
     [Input('test-condition-checklist', 'value'),
     Input('material-property-table', 'sort_by'),
     Input('material-dropdown', 'value'),
-    Input('my-range-slider', 'value')]
+    Input('property-dropdown', 'value'),
+    Input('my-range-slider', 'value'),
+    ]
     )
-def update_material_property_table(test_condition_value, sort_by, material_value, property_range_value):
+def update_material_property_table(test_condition_value, sort_by, material_value, \
+    properties_to_filter, property_range_value):
     if len(sort_by):
         dff = df6.sort_values(
             sort_by[0]['column_id'],
@@ -73,9 +76,12 @@ def update_material_property_table(test_condition_value, sort_by, material_value
     if property_range_value is None:
         pass
     else:
-        dff = dff[
-            (property_range_value[0] < dff['F1tu (ksi)']) & (dff['F1tu (ksi)'] < property_range_value[1])
-        ]
+        # do no filter by property if property is not chosen from dropdown
+        if properties_to_filter is not None:
+            if len(properties_to_filter) != 0:
+                dff = dff[
+                    (property_range_value[0] < dff['F1tu (ksi)']) & (dff['F1tu (ksi)'] < property_range_value[1])
+                ]
 
 
     #filter by test condition
@@ -117,7 +123,16 @@ def update_property_output(value):
     [State("property_range_modal", "is_open")],
 )
 def toggle_property_range_modal(n1, n2, is_open):
-    if n1 or n2:
+    #None is status before user has even selected property from dropdown
+    if n1 is not None:
+        # no selection from dropdown does not change property_range_modal status
+        if len(n1) == 0:
+            return is_open
+        # if user selects F1tu then open F1tu property_range_modal
+        if n1[0] == 1:
+            return not is_open
+    # if user presses close property_range_modal then close the modal
+    if n2:
         return not is_open
     return is_open
 
@@ -125,7 +140,7 @@ def toggle_property_range_modal(n1, n2, is_open):
     Output('output-container-range-slider', 'children'),
     [Input('my-range-slider', 'value')])
 def update_range_output(value):
-    return 'You have selected "{}"'.format(value)
+    return 'You have selected between {} and {}'.format(value[0], value[1])
 
 
 if __name__ == '__main__':
