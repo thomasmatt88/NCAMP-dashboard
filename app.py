@@ -18,14 +18,14 @@ server = app.server #need to add this line for heroku deployment
 
 #this element will contain all our other elements 
 app.layout = Layout
-
+"""
 #usually place callbacks near bottom of application
 @app.callback(
     Output('material-selection', 'children'),
     [Input('material-dropdown', 'value')])
 def update_material_output(value):
     return 'You have selected "{}"'.format(value)
-
+"""
 @app.callback(
     Output('material-table', 'data'), #one output id can have one callback
     [Input('material-dropdown', 'value'),
@@ -36,13 +36,13 @@ def update_material_table(value, sort_by):
         return dff[dff['id'] == value].to_dict("rows") #one value at a time
     else:
         return dff[dff['id'].isin(value)].to_dict("rows")
-
+"""
 @app.callback(
     Output('test-condition-selection', 'children'),
     [Input('test-condition-checklist', 'value')])
 def update_material_property_output(value):
     return 'You have selected "{}"'.format(value)
-
+"""
 @app.callback(
     Output('material-property-table', 'data'), #one output id can have one callback
     [Input('test-condition-checklist', 'value'),
@@ -110,13 +110,13 @@ def toggle_property_modal(n1, n2, is_open):
     if n1 or n2:
         return not is_open
     return is_open
-
+"""
 @app.callback(
     Output('material-property-selection', 'children'),
     [Input('property-dropdown', 'value')])
 def update_property_output(value):
     return 'You have selected "{}"'.format(value)
-
+"""
 @app.callback(
     Output("property_range_modal", "is_open"),
     [Input('property-dropdown', 'value'), Input("close_property_range_modal", "n_clicks")],
@@ -140,7 +140,7 @@ def toggle_property_range_modal(n1, n2, is_open):
     Output('output-container-range-slider', 'children'),
     [Input('my-range-slider', 'value')])
 def update_range_output(value):
-    return 'You have selected between {} and {}'.format(value[0], value[1])
+    return 'You have selected between {} ksi and {} ksi'.format(value[0], value[1])
 
 
 if __name__ == '__main__':

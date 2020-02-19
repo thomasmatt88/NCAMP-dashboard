@@ -27,6 +27,8 @@ material_table = dash_table.DataTable(
             'fontWeight': 'bold'
         },
         style_table={
+            'padding-top': '10px',
+            'padding-bottom': '10px',
             "maxWidth": '85%',
             "margin-left": 'auto',
             "margin-right": 'auto'
@@ -43,6 +45,7 @@ property_table = dash_table.DataTable(
             #'height': 'auto'
         },
         style_table={
+            'padding-top': '10px',
             "maxWidth": '85%',
             "margin-left": 'auto',
             "margin-right": 'auto'
@@ -139,17 +142,17 @@ Layout = html.Div([
     html.H1("NCAMP Table"),
     html.H3("Select a Material"),
     material_dropdown,
-    html.Div(
-        id = "material-selection", #need to reference for callback
-        ), 
+    #html.Div(
+        #id = "material-selection", #need to reference for callback
+    #), 
     material_table,
     html.H3("Select a Filter"),
     test_conditions_modal, 
-    html.Div(
-        id = "test-condition-selection", #need to reference for callback
-    ),
-    html.Div(
-        id = "material-property-selection", #need to reference for callback
-    ),
+    #html.Div(
+       # id = "test-condition-selection", #need to reference for callback
+    #),
+    #html.Div(
+        #id = "material-property-selection", #need to reference for callback
+    #),
     property_table
 ])
