@@ -40,14 +40,7 @@ property_table = dash_table.DataTable(
         sort_by = []
 )
 
-test_conditions_modal = html.Div(
-        [
-            dbc.Button("Test Condition", id="open"),
-            dbc.Modal(
-                [
-                    dbc.ModalHeader("Filter properties by test condition."),
-                    dbc.ModalBody(
-                        dcc.Checklist(
+test_conditions_checklist = dcc.Checklist(
                             id = 'test-condition-checklist', #need to reference for callback
                             options = [
                                 {'label': '-65°F, dry', 'value': 1},
@@ -59,14 +52,45 @@ test_conditions_modal = html.Div(
                                 {'label': '200°F, wet', 'value': 7}
                             
                             ]
-                        )
+)
+
+property_dropdown = dcc.Dropdown(
+        id = 'property-dropdown', #need to reference for callback
+        options=[
+        {'label': 'F1tu', 'value': 1},
+        ],
+        placeholder="Select a material",
+        multi = False
+)
+
+test_conditions_modal = html.Div(
+        [
+            dbc.Button("Test Condition", color = "primary", id="open"),
+            dbc.Button("Material Property", color = "secondary", id = "open_property_modal"),
+            dbc.Modal(
+                [
+                    dbc.ModalHeader("Filter properties by test condition."),
+                    dbc.ModalBody(
+                        test_conditions_checklist
                     ),
                     dbc.ModalFooter(
-                        dbc.Button("Close", id="close", className="ml-auto")
+                        dbc.Button("Close", color = "primary", id="close", className="ml-auto")
                     ),
                 ],
                 id="modal",
             ),
+            dbc.Modal(
+                [
+                    dbc.ModalHeader("Filter properties by property range."),
+                    dbc.ModalBody(
+                        property_dropdown
+                    ),
+                    dbc.ModalFooter(
+                        dbc.Button("Close", color = "secondary", id="close_property_modal", className="ml-auto")
+                    ),
+                ],
+                id="property_modal",
+            )
         ]
 )
 
