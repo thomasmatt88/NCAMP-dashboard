@@ -1,12 +1,15 @@
 from sqlalchemy import create_engine
 import pandas as pd
 
-db_connection_str = 'mysql+pymysql://root:root@localhost:3306/NCAMP'
-db_connection = create_engine(db_connection_str)
+#db_connection_str = 'mysql+pymysql://root:root@localhost:3306/NCAMP'
+#db_connection = create_engine(db_connection_str)
 
-df = pd.read_sql('SELECT * FROM material', con=db_connection)
-df1 = pd.read_sql('SELECT * FROM material_properties', con=db_connection)
-df2 = pd.read_sql('SELECT * FROM test_conditions', con=db_connection)
+#df = pd.read_sql('SELECT * FROM material', con=db_connection)
+df = pd.read_pickle('material.pickle')
+#df1 = pd.read_sql('SELECT * FROM material_properties', con=db_connection)
+df1 = pd.read_pickle('material_properties.pickle')
+#df2 = pd.read_sql('SELECT * FROM test_conditions', con=db_connection)
+df2 = pd.read_pickle('test_conditions.pickle')
 df3 = pd.merge(df1, df2, how = 'inner', left_on = 'test_conditions_id', right_on = 'id')
 df4 = pd.merge(df, df3, how = 'inner', left_on = 'id', right_on = 'material_id')
 df5 = df4
