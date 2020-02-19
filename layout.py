@@ -4,11 +4,7 @@ import dash_table
 import dash_bootstrap_components as dbc
 from dataframe import df, df6
 
-#this element will contain all our other elements 
-Layout = html.Div([
-    html.H1("NCAMP Table"),
-    html.H3("Select a Material"),
-    dcc.Dropdown(
+material_dropdown = dcc.Dropdown(
         id = 'material-dropdown', #need to reference for callback
         options=[
         {'label': 'Hexcel AS4/8552 unidirectional tape', 'value': 1},
@@ -21,20 +17,30 @@ Layout = html.Div([
         ],
         placeholder="Select a material",
         multi = True
-    ),
-    html.Div(
-        id = "material-selection", #need to reference for callback
-        ), 
-    dash_table.DataTable(
+)
+
+material_table = dash_table.DataTable(
         id = 'material-table', #need to reference for callback
         columns = [{"name": i, "id": i} for i in df.drop(columns = 'id').columns], #don't need id column
         data = df.drop(columns = 'id').to_dict("rows"),
         style_header = {
             'fontWeight': 'bold'
         }
-    ),
-    html.H3("Select a Filter"),
-    html.Div(
+)
+
+property_table = dash_table.DataTable(
+        id = 'material-property-table', #need to reference for callback
+        columns = [{"name": i, "id": i} for i in df6.drop(columns = ['material_id']).columns], #don't need id column
+        data = df6.drop(columns = ['material_id']).to_dict("rows"),
+        style_header = {
+            'fontWeight': 'bold'
+        },
+        sort_action = 'custom',
+        sort_mode = 'single',
+        sort_by = []
+)
+
+test_conditions_modal = html.Div(
         [
             dbc.Button("Test Condition", id="open"),
             dbc.Modal(
@@ -62,19 +68,21 @@ Layout = html.Div([
                 id="modal",
             ),
         ]
-    ),
+)
+
+#this element will contain all our other elements 
+Layout = html.Div([
+    html.H1("NCAMP Table"),
+    html.H3("Select a Material"),
+    material_dropdown,
+    html.Div(
+        id = "material-selection", #need to reference for callback
+        ), 
+    material_table,
+    html.H3("Select a Filter"),
+    test_conditions_modal, 
     html.Div(
         id = "material-property-selection", #need to reference for callback
     ),
-    dash_table.DataTable(
-        id = 'material-property-table', #need to reference for callback
-        columns = [{"name": i, "id": i} for i in df6.drop(columns = ['material_id']).columns], #don't need id column
-        data = df6.drop(columns = ['material_id']).to_dict("rows"),
-        style_header = {
-            'fontWeight': 'bold'
-        },
-        sort_action = 'custom',
-        sort_mode = 'single',
-        sort_by = []
-    )
+    property_table
 ])
