@@ -12,6 +12,7 @@ pandas = "*"
 sqlalchemy = "*"
 pymysql = "*"
 dash-bootstrap-components = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
