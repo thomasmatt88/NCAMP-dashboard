@@ -25,6 +25,11 @@ material_table = dash_table.DataTable(
         data = df.drop(columns = 'id').to_dict("rows"),
         style_header = {
             'fontWeight': 'bold'
+        },
+        style_table={
+            "maxWidth": '85%',
+            "margin-left": 'auto',
+            "margin-right": 'auto'
         }
 )
 
@@ -33,8 +38,21 @@ property_table = dash_table.DataTable(
         columns = [{"name": i, "id": i} for i in df6.drop(columns = ['material_id', 'test_conditions_id']).columns], #don't need id column
         data = df6.drop(columns = ['material_id']).to_dict("rows"),
         style_header = {
-            'fontWeight': 'bold'
+            'fontWeight': 'bold',
+            'whiteSpace': 'normal'
+            #'height': 'auto'
         },
+        style_table={
+            "maxWidth": '85%',
+            "margin-left": 'auto',
+            "margin-right": 'auto'
+        },
+        style_cell_conditional = [
+            {'if': {'column_id': 'Test Temperature (°F)'},
+            'maxWidth': '90px'},
+            {'if': {'column_id': 'Test Environment'},
+            'maxWidth': '90px'}
+        ],
         sort_action = 'custom',
         sort_mode = 'single',
         sort_by = []
