@@ -51,7 +51,8 @@ test_conditions_checklist = dcc.Checklist(
                                 {'label': '180°F, wet', 'value': 6},
                                 {'label': '200°F, wet', 'value': 7}
                             
-                            ]
+                            ],
+                            inputStyle={"margin-left": "20px", "margin-right": "10px"}
 )
 
 property_dropdown = dcc.Dropdown(
@@ -65,8 +66,8 @@ property_dropdown = dcc.Dropdown(
 
 test_conditions_modal = html.Div(
         [
-            dbc.Button("Test Condition", color = "primary", id="open"),
-            dbc.Button("Material Property", color = "secondary", id = "open_property_modal"),
+            dbc.Button("Test Condition", color = "primary", id="open", style={'margin-right': 10}),
+            dbc.Button("Material Property", color = "secondary", id = "open_property_modal", style={'margin-right': 10}),
             dbc.Modal(
                 [
                     dbc.ModalHeader("Filter properties by test condition."),
@@ -110,7 +111,7 @@ test_conditions_modal = html.Div(
                         dbc.Button("Close", color = "secondary", id="close_property_range_modal", className="ml-auto")
                     ),
                 ],
-                id="property_range_modal",
+                id="property_range_modal"
             )
         ]
 )
