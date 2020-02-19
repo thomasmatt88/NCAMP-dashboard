@@ -27,8 +27,8 @@ material_table = dash_table.DataTable(
             'fontWeight': 'bold'
         },
         style_table={
-            'padding-top': '10px',
-            'padding-bottom': '10px',
+            'margin-top': '35px',
+            'margin-bottom': '35px',
             "maxWidth": '85%',
             "margin-left": 'auto',
             "margin-right": 'auto'
@@ -45,7 +45,7 @@ property_table = dash_table.DataTable(
             #'height': 'auto'
         },
         style_table={
-            'padding-top': '10px',
+            'padding-top': '35px',
             "maxWidth": '85%',
             "margin-left": 'auto',
             "margin-right": 'auto'
