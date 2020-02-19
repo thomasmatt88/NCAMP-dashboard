@@ -20,6 +20,14 @@ df5 = df4
 df6 = pd.merge(df[['id', 'Material']], df1, how = 'inner', left_on = 'id', right_on = 'material_id')
 df6 = df6.drop(columns = ['id_x', 'id_y'])
 
+#join df6 and test_conditions by test_conditions_id
+df6 = pd.merge(df2, df6, how = 'inner', left_on = 'id', right_on = 'test_conditions_id')
+df6 = df6.drop(columns = ['id'])
+#move 'Material' to the first column
+temp = df6['Material']
+df6 = df6.drop(columns = ['Material'])
+df6.insert(0, 'Material', temp)
+
 # add units header to df and df6
 df = df.rename(columns = {"MOT": "MOT (°F)", "Tg": "Tg (°F)", "WetTg" :"WetTg(°F)", "FAW": "FAW (g/m^2)"})
 """
