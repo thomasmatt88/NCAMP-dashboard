@@ -3,6 +3,7 @@ import dash_core_components as dcc
 import dash_table
 import dash_bootstrap_components as dbc
 from dataframe import material_df, property_df
+import views.property_filter_modals
 
 material_dropdown = dcc.Dropdown(
         id = 'material-dropdown', #need to reference for callback
@@ -85,7 +86,7 @@ property_dropdown = dcc.Dropdown(
         multi = True
 )
 
-test_conditions_modal = html.Div(
+property_filters = html.Div(
         [
             dbc.Button("Test Condition", color = "primary", id="open", style={'margin-right': 10}),
             dbc.Button("Material Property", color = "secondary", id = "open_property_modal", style={'margin-right': 10}),
@@ -113,27 +114,7 @@ test_conditions_modal = html.Div(
                 ],
                 id="property_modal",
             ),
-            dbc.Modal(
-                [
-                    dbc.ModalHeader("F1tu"),
-                    dbc.ModalBody(
-                        html.Div([
-                            dcc.RangeSlider(
-                                id='my-range-slider',
-                                min=property_df['F1tu (ksi)'].min(),
-                                max=property_df['F1tu (ksi)'].max(),
-                                step=1,
-                                value=[property_df['F1tu (ksi)'].min(), property_df['F1tu (ksi)'].max()]
-                            ),
-                            html.Div(id='output-container-range-slider')
-                        ])
-                    ),
-                    dbc.ModalFooter(
-                        dbc.Button("Close", color = "secondary", id="close_property_range_modal", className="ml-auto")
-                    ),
-                ],
-                id="property_range_modal"
-            )
+            views.property_filter_modals.modal
         ]
 )
 
@@ -147,7 +128,7 @@ Layout = html.Div([
     #), 
     material_table,
     html.H3("Select a Filter"),
-    test_conditions_modal, 
+    property_filters, 
     #html.Div(
        # id = "test-condition-selection", #need to reference for callback
     #),

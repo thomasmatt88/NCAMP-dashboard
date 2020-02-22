@@ -9,7 +9,7 @@ from dash.dependencies import Input, Output, State
 import pymysql
 
 #from other modules
-from layout import Layout
+from views.layout import Layout
 from dataframe import material_df, property_df
 
 #app = dash.Dash(__name__)
