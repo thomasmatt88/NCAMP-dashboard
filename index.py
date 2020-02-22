@@ -7,7 +7,6 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 import pymysql
-import os
 
 #from other modules
 from views.layout import Layout
@@ -117,6 +116,4 @@ def toggle_property_modal(n1, n2, is_open):
 
 if __name__ == '__main__':
     #don't use debug = True on production server
-    server = app.server #need to add this line for heroku deployment
-    server.secret_key = os.environ.get('secret_key', 'secret')
     app.run_server(debug=True)
