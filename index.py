@@ -12,7 +12,7 @@ import pymysql
 from views.layout import Layout
 from dataframe import material_df, property_df
 from app import app
-import property_filters
+import controllers.property_filters
 
 #this element will contain all our other elements 
 app.layout = Layout
