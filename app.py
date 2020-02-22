@@ -36,24 +36,18 @@ def update_material_table(value, sort_by):
         return dff[dff['id'] == value].to_dict("rows") #one value at a time
     else:
         return dff[dff['id'].isin(value)].to_dict("rows")
-"""
-@app.callback(
-    Output('test-condition-selection', 'children'),
-    [Input('test-condition-checklist', 'value')])
-def update_material_property_output(value):
-    return 'You have selected "{}"'.format(value)
-"""
 @app.callback(
     Output('material-property-table', 'data'), #one output id can have one callback
     [Input('test-condition-checklist', 'value'),
     Input('material-property-table', 'sort_by'),
     Input('material-dropdown', 'value'),
     Input('property-dropdown', 'value'),
-    Input('my-range-slider', 'value'),
+    Input('my-range-slider-F1tu', 'value'),
+    Input('my-range-slider-F2tu', 'value')
     ]
     )
 def update_material_property_table(test_condition_value, sort_by, material_value, \
-    properties_to_filter, property_range_value):
+    properties_to_filter, property_range_value_F1tu, property_range_value_F2tu):
     if len(sort_by):
         dff = property_df.sort_values(
             sort_by[0]['column_id'],
@@ -73,14 +67,23 @@ def update_material_property_table(test_condition_value, sort_by, material_value
         dff = dff[dff['material_id'].isin(material_value)].drop(columns = ['material_id'])
     
     #filter by material property range
-    if property_range_value is None:
+    if property_range_value_F1tu is None:
         pass
     else:
         # do no filter by property if property is not chosen from dropdown
         if properties_to_filter is not None:
             if len(properties_to_filter) != 0:
                 dff = dff[
-                    (property_range_value[0] < dff['F1tu (ksi)']) & (dff['F1tu (ksi)'] < property_range_value[1])
+                    (property_range_value_F1tu[0] < dff['F1tu (ksi)']) & (dff['F1tu (ksi)'] < property_range_value_F1tu[1])
+                ]
+    if property_range_value_F2tu is None:
+        pass
+    else:
+        # do no filter by property if property is not chosen from dropdown
+        if properties_to_filter is not None:
+            if len(properties_to_filter) != 0:
+                dff = dff[
+                    (property_range_value_F2tu[0] < dff['F2tu (ksi)']) & (dff['F2tu (ksi)'] < property_range_value_F2tu[1])
                 ]
 
 
@@ -110,17 +113,13 @@ def toggle_property_modal(n1, n2, is_open):
     if n1 or n2:
         return not is_open
     return is_open
-"""
+
+"""Property Filter Modals"""
+#F1tu
 @app.callback(
-    Output('material-property-selection', 'children'),
-    [Input('property-dropdown', 'value')])
-def update_property_output(value):
-    return 'You have selected "{}"'.format(value)
-"""
-@app.callback(
-    Output("property_range_modal", "is_open"),
-    [Input('property-dropdown', 'value'), Input("close_property_range_modal", "n_clicks")],
-    [State("property_range_modal", "is_open")],
+    Output("property_range_modal_F1tu", "is_open"),
+    [Input('property-dropdown', 'value'), Input("close_property_range_modal_F1tu", "n_clicks")],
+    [State("property_range_modal_F1tu", "is_open")],
 )
 def toggle_property_range_modal(n1, n2, is_open):
     #None is status before user has even selected property from dropdown
@@ -137,11 +136,36 @@ def toggle_property_range_modal(n1, n2, is_open):
     return is_open
 
 @app.callback(
-    Output('output-container-range-slider', 'children'),
-    [Input('my-range-slider', 'value')])
+    Output('output-container-range-slider-F1tu', 'children'),
+    [Input('my-range-slider-F1tu', 'value')])
 def update_range_output(value):
     return 'You have selected between {} ksi and {} ksi'.format(value[0], value[1])
 
+#F2tu
+@app.callback(
+    Output("property_range_modal_F2tu", "is_open"),
+    [Input('property-dropdown', 'value'), Input("close_property_range_modal_F2tu", "n_clicks")],
+    [State("property_range_modal_F2tu", "is_open")],
+)
+def toggle_property_range_modal_F2tu(n1, n2, is_open):
+    #None is status before user has even selected property from dropdown
+    if n1 is not None:
+        # no selection from dropdown does not change property_range_modal status
+        if len(n1) == 0:
+            return is_open
+        # if user selects F1tu then open F1tu property_range_modal
+        if n1[0] == 2:
+            return not is_open
+    # if user presses close property_range_modal then close the modal
+    if n2:
+        return not is_open
+    return is_open
+
+@app.callback(
+    Output('output-container-range-slider-F2tu', 'children'),
+    [Input('my-range-slider-F2tu', 'value')])
+def update_range_output_F2tu(value):
+    return 'You have selected between {} ksi and {} ksi'.format(value[0], value[1])
 
 if __name__ == '__main__':
     #don't use debug = True on production server
