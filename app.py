@@ -13,7 +13,7 @@ app.config.suppress_callback_exceptions = True
 #from dash_test import index
 
 #if __name__ == '__main__':
-#import index
+import index
 
 
 
