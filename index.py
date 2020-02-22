@@ -112,6 +112,9 @@ def toggle_property_modal(n1, n2, is_open):
         return not is_open
     return is_open
 
+app.run_server(debug=True)
+"""
 if __name__ == '__main__':
     #don't use debug = True on production server
     app.run_server(debug=True)
+"""
