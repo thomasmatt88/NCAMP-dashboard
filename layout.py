@@ -2,7 +2,7 @@ import dash_html_components as html
 import dash_core_components as dcc
 import dash_table
 import dash_bootstrap_components as dbc
-from dataframe import df, df6
+from dataframe import material_df, property_df
 
 material_dropdown = dcc.Dropdown(
         id = 'material-dropdown', #need to reference for callback
@@ -21,8 +21,8 @@ material_dropdown = dcc.Dropdown(
 
 material_table = dash_table.DataTable(
         id = 'material-table', #need to reference for callback
-        columns = [{"name": i, "id": i} for i in df.drop(columns = 'id').columns], #don't need id column
-        data = df.drop(columns = 'id').to_dict("rows"),
+        columns = [{"name": i, "id": i} for i in material_df.drop(columns = 'id').columns], #don't need id column
+        data = material_df.drop(columns = 'id').to_dict("rows"),
         style_header = {
             'fontWeight': 'bold'
         },
@@ -37,8 +37,8 @@ material_table = dash_table.DataTable(
 
 property_table = dash_table.DataTable(
         id = 'material-property-table', #need to reference for callback
-        columns = [{"name": i, "id": i} for i in df6.drop(columns = ['material_id', 'test_conditions_id']).columns], #don't need id column
-        data = df6.drop(columns = ['material_id']).to_dict("rows"),
+        columns = [{"name": i, "id": i} for i in property_df.drop(columns = ['material_id', 'test_conditions_id']).columns], #don't need id column
+        data = property_df.drop(columns = ['material_id']).to_dict("rows"),
         style_header = {
             'fontWeight': 'bold',
             'whiteSpace': 'normal'
@@ -120,10 +120,10 @@ test_conditions_modal = html.Div(
                         html.Div([
                             dcc.RangeSlider(
                                 id='my-range-slider',
-                                min=df6['F1tu (ksi)'].min(),
-                                max=df6['F1tu (ksi)'].max(),
+                                min=property_df['F1tu (ksi)'].min(),
+                                max=property_df['F1tu (ksi)'].max(),
                                 step=1,
-                                value=[df6['F1tu (ksi)'].min(), df6['F1tu (ksi)'].max()]
+                                value=[property_df['F1tu (ksi)'].min(), property_df['F1tu (ksi)'].max()]
                             ),
                             html.Div(id='output-container-range-slider')
                         ])

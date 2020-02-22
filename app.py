@@ -10,7 +10,7 @@ import pymysql
 
 #from other modules
 from layout import Layout
-from dataframe import df, df6
+from dataframe import material_df, property_df
 
 #app = dash.Dash(__name__)
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -31,7 +31,7 @@ def update_material_output(value):
     [Input('material-dropdown', 'value'),
     Input('material-table', 'sort_by')])
 def update_material_table(value, sort_by):
-    dff = df
+    dff = material_df
     if value is None:
         return dff[dff['id'] == value].to_dict("rows") #one value at a time
     else:
@@ -55,14 +55,14 @@ def update_material_property_output(value):
 def update_material_property_table(test_condition_value, sort_by, material_value, \
     properties_to_filter, property_range_value):
     if len(sort_by):
-        dff = df6.sort_values(
+        dff = property_df.sort_values(
             sort_by[0]['column_id'],
             ascending=sort_by[0]['direction'] == 'asc',
             inplace=False
         )
     else:
         # No sort is applied
-        dff = df6
+        dff = property_df
     
     #filter by material
     if material_value is None:
