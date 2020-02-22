@@ -9,8 +9,8 @@ app.config.suppress_callback_exceptions = True
 # index imports app, so import it after app is defined to avoid a circular import
 #from dash_test import index
 
-#if __name__ == '__main__':
-import index
+if __name__ == '__main__':
+    import index
 
 
 
