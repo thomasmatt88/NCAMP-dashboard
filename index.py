@@ -36,12 +36,13 @@ def update_material_table(value, sort_by):
         return dff[dff['id'].isin(value)].to_dict("rows")
 @app.callback(
     Output('material-property-table', 'data'), #one output id can have one callback
-    [Input('test-condition-checklist', 'value'),
-    Input('material-property-table', 'sort_by'),
-    Input('material-dropdown', 'value'),
-    Input('property-dropdown', 'value'),
-    Input('my-range-slider-F1tu', 'value'),
-    Input('my-range-slider-F2tu', 'value')
+    [
+        Input('test-condition-checklist', 'value'),
+        Input('material-property-table', 'sort_by'),
+        Input('material-dropdown', 'value'),
+        Input('property-dropdown', 'value'),
+        Input('my-range-slider-F1tu', 'value'),
+        Input('my-range-slider-F2tu', 'value')
     ]
     )
 def update_material_property_table(test_condition_value, sort_by, material_value, \
@@ -68,9 +69,11 @@ def update_material_property_table(test_condition_value, sort_by, material_value
     if property_range_value_F1tu is None:
         pass
     else:
-        # do no filter by property if property is not chosen from dropdown
+        # do not filter by property if property is not chosen from dropdown
         if properties_to_filter is not None:
-            if len(properties_to_filter) != 0:
+            #if len(properties_to_filter) != 0:
+            #if F1tu is chosen from property dropdown
+            if 1 in properties_to_filter:
                 dff = dff[
                     (property_range_value_F1tu[0] < dff['F1tu (ksi)']) & (dff['F1tu (ksi)'] < property_range_value_F1tu[1])
                 ]
@@ -79,7 +82,9 @@ def update_material_property_table(test_condition_value, sort_by, material_value
     else:
         # do no filter by property if property is not chosen from dropdown
         if properties_to_filter is not None:
-            if len(properties_to_filter) != 0:
+            #if len(properties_to_filter) != 0:
+            #if F2tu is chosen from property dropdown
+            if 2 in properties_to_filter:
                 dff = dff[
                     (property_range_value_F2tu[0] < dff['F2tu (ksi)']) & (dff['F2tu (ksi)'] < property_range_value_F2tu[1])
                 ]
