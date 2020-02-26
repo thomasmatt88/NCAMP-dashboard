@@ -30,6 +30,10 @@ property_df.insert(0, 'Material', temp)
 
 # add units header to df and property_df
 material_df = material_df.rename(columns = {"MOT": "MOT (°F)", "Tg": "Tg (°F)", "WetTg" :"WetTg(°F)", "FAW": "FAW (g/m^2)"})
+"""
 property_df = property_df.rename(columns  = {"F1tu": "F1tu (ksi)", "F2tu": "F2tu (ksi)", "E1t": "E1t (msi)", \
     "F1cu": "F1cu (ksi)", "F2cu": "F2cu (ksi)", "F12su": "F12su (ksi)", "F31sbs": "F31sbs (ksi)", \
         "CPT": "CPT (in/ply)", "temperature": "Test Temperature (°F)", "environment": "Test Environment"})
+"""
+property_df = property_df.rename(columns  = 
+                                {"temperature": "Test Temperature", "environment": "Test Environment"})

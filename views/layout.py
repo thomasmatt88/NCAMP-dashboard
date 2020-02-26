@@ -38,7 +38,19 @@ material_table = dash_table.DataTable(
 
 property_table = dash_table.DataTable(
         id = 'material-property-table', #need to reference for callback
-        columns = [{"name": i, "id": i} for i in property_df.drop(columns = ['material_id', 'test_conditions_id']).columns], #don't need id column
+        columns = [
+            {"name": ["Material", ""], "id": "Material"},
+            {"name": ["Test Temperature", "°F"], "id": "Test Temperature"},
+            {"name": ["Test Environment", ""], "id": "Test Environment"},
+            {"name": ["F1tu", "ksi"], "id": "F1tu"},
+            {"name": ["F2tu", "ksi"], "id": "F2tu"},
+            {"name": ["E1t", "msi"], "id": "E1t"},
+            {"name": ["F1cu", "ksi"], "id": "F1cu"},
+            {"name": ["F2cu", "ksi"], "id": "F2cu"},
+            {"name": ["F12su", "ksi"], "id": "F12su"},
+            {"name": ["F31sbs", "ksi"], "id": "F31sbs"},
+            {"name": ["CPT", "in/ply"], "id": "CPT"}
+        ], 
         data = property_df.drop(columns = ['material_id']).to_dict("rows"),
         style_header = {
             'fontWeight': 'bold',
@@ -51,12 +63,14 @@ property_table = dash_table.DataTable(
             "margin-left": 'auto',
             "margin-right": 'auto'
         },
+        
         style_cell_conditional = [
-            {'if': {'column_id': 'Test Temperature (°F)'},
+            {'if': {'column_id': 'Test Temperature'},
             'maxWidth': '90px'},
             {'if': {'column_id': 'Test Environment'},
             'maxWidth': '90px'}
         ],
+        
         sort_action = 'custom',
         sort_mode = 'single',
         sort_by = []

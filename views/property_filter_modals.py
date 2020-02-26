@@ -10,10 +10,10 @@ F1tu = dbc.Modal(
                         html.Div([
                             dcc.RangeSlider(
                                 id='my-range-slider-F1tu',
-                                min=property_df['F1tu (ksi)'].min(),
-                                max=property_df['F1tu (ksi)'].max(),
+                                min=property_df['F1tu'].min(),
+                                max=property_df['F1tu'].max(),
                                 step=1,
-                                value=[property_df['F1tu (ksi)'].min(), property_df['F1tu (ksi)'].max()]
+                                value=[property_df['F1tu'].min(), property_df['F1tu'].max()]
                             ),
                             html.Div(id='output-container-range-slider-F1tu')
                         ])
@@ -32,10 +32,10 @@ F2tu = dbc.Modal(
                         html.Div([
                             dcc.RangeSlider(
                                 id='my-range-slider-F2tu',
-                                min=property_df['F2tu (ksi)'].min(),
-                                max=property_df['F2tu (ksi)'].max(),
+                                min=property_df['F2tu'].min(),
+                                max=property_df['F2tu'].max(),
                                 step=1,
-                                value=[property_df['F2tu (ksi)'].min(), property_df['F2tu (ksi)'].max()]
+                                value=[property_df['F2tu'].min(), property_df['F2tu'].max()]
                             ),
                             html.Div(id='output-container-range-slider-F2tu')
                         ])
@@ -54,10 +54,10 @@ E1t = dbc.Modal(
                         html.Div([
                             dcc.RangeSlider(
                                 id='my-range-slider-E1t',
-                                min=property_df['E1t (msi)'].min(),
-                                max=property_df['E1t (msi)'].max(),
+                                min=property_df['E1t'].min(),
+                                max=property_df['E1t'].max(),
                                 step=1,
-                                value=[property_df['E1t (msi)'].min(), property_df['E1t (msi)'].max()]
+                                value=[property_df['E1t'].min(), property_df['E1t'].max()]
                             ),
                             html.Div(id='output-container-range-slider-E1t')
                         ])

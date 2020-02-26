@@ -50,7 +50,9 @@ def update_material_table(value, sort_by):
         Input('my-range-slider-E1t', 'value')
     ]
     )
-def update_material_property_table(test_condition_value, sort_by, material_value, properties_to_filter, \
+
+def update_material_property_table(
+    test_condition_value, sort_by, material_value, properties_to_filter, \
     property_range_value_F1tu, property_range_value_F2tu, property_range_value_E1t):
 
     #sort dataframe
@@ -68,7 +70,7 @@ def update_material_property_table(test_condition_value, sort_by, material_value
             #if F1tu is chosen from property dropdown
             if 1 in properties_to_filter:
                 dff = dff[
-                    (property_range_value_F1tu[0] < dff['F1tu (ksi)']) & (dff['F1tu (ksi)'] < property_range_value_F1tu[1])
+                    (property_range_value_F1tu[0] < dff['F1tu']) & (dff['F1tu'] < property_range_value_F1tu[1])
                 ]
     if property_range_value_F2tu is None:
         pass
@@ -78,7 +80,7 @@ def update_material_property_table(test_condition_value, sort_by, material_value
             #if F2tu is chosen from property dropdown
             if 2 in properties_to_filter:
                 dff = dff[
-                    (property_range_value_F2tu[0] < dff['F2tu (ksi)']) & (dff['F2tu (ksi)'] < property_range_value_F2tu[1])
+                    (property_range_value_F2tu[0] < dff['F2tu']) & (dff['F2tu'] < property_range_value_F2tu[1])
                 ]
     
     if property_range_value_E1t is None:
@@ -89,7 +91,7 @@ def update_material_property_table(test_condition_value, sort_by, material_value
             #if E1t is chosen from property dropdown
             if 3 in properties_to_filter:
                 dff = dff[
-                    (property_range_value_E1t[0] < dff['E1t (msi)']) & (dff['E1t (msi)'] < property_range_value_E1t[1])
+                    (property_range_value_E1t[0] < dff['E1t']) & (dff['E1t'] < property_range_value_E1t[1])
                 ]
     
 
