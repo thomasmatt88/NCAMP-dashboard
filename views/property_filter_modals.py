@@ -46,3 +46,25 @@ F2tu = dbc.Modal(
                 ],
                 id="property_range_modal_F2tu"
             )
+            
+E1t = dbc.Modal(
+                [
+                    dbc.ModalHeader("E1t"),
+                    dbc.ModalBody(
+                        html.Div([
+                            dcc.RangeSlider(
+                                id='my-range-slider-E1t',
+                                min=property_df['E1t (msi)'].min(),
+                                max=property_df['E1t (msi)'].max(),
+                                step=1,
+                                value=[property_df['E1t (msi)'].min(), property_df['E1t (msi)'].max()]
+                            ),
+                            html.Div(id='output-container-range-slider-E1t')
+                        ])
+                    ),
+                    dbc.ModalFooter(
+                        dbc.Button("Close", color = "secondary", id="close_property_range_modal_E1t", className="ml-auto")
+                    ),
+                ],
+                id="property_range_modal_E1t"
+            )

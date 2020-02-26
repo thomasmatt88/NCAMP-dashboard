@@ -12,19 +12,24 @@ dropdown_previous_state = []
 @app.callback(
     [
         Output("property_range_modal_F1tu", "is_open"),
-        Output("property_range_modal_F2tu", "is_open")
+        Output("property_range_modal_F2tu", "is_open"),
+        Output("property_range_modal_E1t", "is_open")
+
     ],
     [
         Input('property-dropdown', 'value'), 
         Input("close_property_range_modal_F1tu", "n_clicks"),
-        Input("close_property_range_modal_F2tu", "n_clicks")
+        Input("close_property_range_modal_F2tu", "n_clicks"),
+        Input("close_property_range_modal_E1t", "n_clicks")
     ],
     [
         State("property_range_modal_F1tu", "is_open"),
-        State("property_range_modal_F2tu", "is_open")
+        State("property_range_modal_F2tu", "is_open"),
+        State("property_range_modal_E1t", "is_open")
     ],
 )
-def toggle_property_range_modal(n1, n2, n3, F1tu_is_open, F2tu_is_open):
+def toggle_property_range_modal(n1, n2, n3, n4, \
+     F1tu_is_open, F2tu_is_open, E1t_is_open):
     global dropdown_previous_state
     ctx = dash.callback_context
     # n1 is hard to process as NoneType
@@ -37,7 +42,7 @@ def toggle_property_range_modal(n1, n2, n3, F1tu_is_open, F2tu_is_open):
         # then do not open a modal
         if len(dropdown_previous_state) >= len(n1):
             dropdown_previous_state = n1
-            return False, False
+            return False, False, False
     
         # if a property was ADDED via dropdown
         # then open the modal of property that was selected
@@ -47,12 +52,14 @@ def toggle_property_range_modal(n1, n2, n3, F1tu_is_open, F2tu_is_open):
                 F1tu_is_open = True
             elif 2 in new_property:
                 F2tu_is_open = True
+            elif 3 in new_property:
+                E1t_is_open = True
             dropdown_previous_state = n1
-            return F1tu_is_open, F2tu_is_open
+            return F1tu_is_open, F2tu_is_open, E1t_is_open
     
     #if here then callback was triggered by closing modal
     dropdown_previous_state = n1
-    return False, False
+    return False, False, False
 
 #F1tu
 @app.callback(
@@ -67,3 +74,10 @@ def update_range_output(value):
     [Input('my-range-slider-F2tu', 'value')])
 def update_range_output_F2tu(value):
     return 'You have selected between {} ksi and {} ksi'.format(value[0], value[1])
+
+#E1t
+@app.callback(
+    Output('output-container-range-slider-E1t', 'children'),
+    [Input('my-range-slider-E1t', 'value')])
+def update_range_output_E1t(value):
+    return 'You have selected between {} msi and {} msi'.format(value[0], value[1])

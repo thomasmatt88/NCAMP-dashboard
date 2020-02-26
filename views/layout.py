@@ -81,7 +81,8 @@ property_dropdown = dcc.Dropdown(
         id = 'property-dropdown', #need to reference for callback
         options=[
             {'label': 'F1tu', 'value': 1},
-            {'label': 'F2tu', 'value': 2}
+            {'label': 'F2tu', 'value': 2},
+            {'label': 'E1t', 'value': 3}
         ],
         placeholder="Select a material property",
         multi = True
@@ -116,7 +117,8 @@ property_filters = html.Div(
                 id="property_modal",
             ),
             views.property_filter_modals.F1tu,
-            views.property_filter_modals.F2tu
+            views.property_filter_modals.F2tu,
+            views.property_filter_modals.E1t
         ]
 )
 
