@@ -48,10 +48,6 @@ def update_material_table(value, sort_by):
     )
 def update_material_property_table(test_condition_value, sort_by, material_value, \
     properties_to_filter, property_range_value_F1tu, property_range_value_F2tu):
-    ctx = dash.callback_context
-    #print(ctx.triggered)
-    #print(ctx.inputs)
-    #print(ctx.states)
 
     #sort dataframe
     dff = sort_dataframe(sort_by, property_df)
