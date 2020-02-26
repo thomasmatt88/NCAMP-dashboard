@@ -13,6 +13,7 @@ from views.layout import Layout
 from dataframe import material_df, property_df
 from app import app
 import controllers.property_filters
+from helpers.filters import filter_by_material, sort_dataframe
 
 #this element will contain all our other elements 
 app.layout = Layout
@@ -47,23 +48,16 @@ def update_material_table(value, sort_by):
     )
 def update_material_property_table(test_condition_value, sort_by, material_value, \
     properties_to_filter, property_range_value_F1tu, property_range_value_F2tu):
-    if len(sort_by):
-        dff = property_df.sort_values(
-            sort_by[0]['column_id'],
-            ascending=sort_by[0]['direction'] == 'asc',
-            inplace=False
-        )
-    else:
-        # No sort is applied
-        dff = property_df
+    ctx = dash.callback_context
+    #print(ctx.triggered)
+    #print(ctx.inputs)
+    #print(ctx.states)
+
+    #sort dataframe
+    dff = sort_dataframe(sort_by, property_df)
     
     #filter by material
-    if material_value is None:
-        #return dff[dff['material_id'] == material_value].drop(columns = ['material_id']).to_dict("rows") #one value at a time
-        dff = dff[dff['material_id'] == material_value].drop(columns = ['material_id']) #one value at a time
-    else:
-        #return dff[dff['material_id'].isin(material_value)].drop(columns = ['material_id']).to_dict("rows")
-        dff = dff[dff['material_id'].isin(material_value)].drop(columns = ['material_id'])
+    dff = filter_by_material(material_value, dff)
     
     #filter by material property range
     if property_range_value_F1tu is None:
