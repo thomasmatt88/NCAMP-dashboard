@@ -40,10 +40,10 @@ def toggle_property_range_modal(n1, n2, n3, F1tu_is_open, F2tu_is_open):
     # compare dropdown to previous state
     if dropdown_previous_state is None:
         # if a property is selected from dropdown then
-        # that property's modal could be open
+        # that property's modal should be open
         if 1 in n1:
             F1tu_is_open = True
-        if 2 in n1:
+        elif 2 in n1:
             F2tu_is_open = True
         dropdown_previous_state = n1
         return F1tu_is_open, F2tu_is_open
@@ -60,7 +60,7 @@ def toggle_property_range_modal(n1, n2, n3, F1tu_is_open, F2tu_is_open):
         new_property = set(n1) - set(dropdown_previous_state)
         if 1 in new_property:
             F1tu_is_open = True
-        if 2 in new_property:
+        elif 2 in new_property:
             F2tu_is_open = True
         dropdown_previous_state = n1
         return F1tu_is_open, F2tu_is_open
