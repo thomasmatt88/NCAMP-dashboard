@@ -1,8 +1,8 @@
 import pandas as pd 
 
 class PropertyDF(pd.DataFrame):
-    #def __init__(self, *args, **kw):
-        #super(PropertyDF, self).__init__(*args, **kw)
+    PROPERTIES = {1: 'F1tu', 2: 'F2tu', 3: 'E1t'}
+
     @property
     def _constructor(self):
         return PropertyDF
@@ -24,5 +24,13 @@ class PropertyDF(pd.DataFrame):
         else:
             # No sort is applied
             dff = self
+        
+        return dff
+    
+    def filter_by_property(self, prop, prop_range):
+        dff = self[
+                (prop_range[0] < self[PropertyDF.PROPERTIES[prop]]) & \
+                    (self[PropertyDF.PROPERTIES[prop]] < prop_range[1])
+            ]
         
         return dff

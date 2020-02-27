@@ -54,47 +54,22 @@ def update_material_property_table(
     test_condition_value, sort_by, material_value, properties_to_filter, \
     property_range_value_F1tu, property_range_value_F2tu, property_range_value_E1t):
 
+    property_range_value_F1tu = [] if property_range_value_F1tu is None else property_range_value_F1tu
+    property_range_value_F2tu = [] if property_range_value_F2tu is None else property_range_value_F2tu
+    property_range_value_E1t = [] if property_range_value_E1t is None else property_range_value_E1t
+    properties_to_filter = [] if properties_to_filter is None else properties_to_filter
+
+    ranges = {1: property_range_value_F1tu, 2: property_range_value_F2tu, 3: property_range_value_E1t}
+
     #sort dataframe
     dff = property_df.sort_dataframe(sort_by)
     
     #filter by material
-    #dff = filter_by_material(material_value, dff)
     dff = dff.filter_by_material(material_value)
-    
-    #filter by material property range
-    if property_range_value_F1tu is None:
-        pass
-    else:
-        # do not filter by property if property is not chosen from dropdown
-        if properties_to_filter is not None:
-            #if F1tu is chosen from property dropdown
-            if 1 in properties_to_filter:
-                dff = dff[
-                    (property_range_value_F1tu[0] < dff['F1tu']) & (dff['F1tu'] < property_range_value_F1tu[1])
-                ]
-    if property_range_value_F2tu is None:
-        pass
-    else:
-        # do no filter by property if property is not chosen from dropdown
-        if properties_to_filter is not None:
-            #if F2tu is chosen from property dropdown
-            if 2 in properties_to_filter:
-                dff = dff[
-                    (property_range_value_F2tu[0] < dff['F2tu']) & (dff['F2tu'] < property_range_value_F2tu[1])
-                ]
-    
-    if property_range_value_E1t is None:
-        pass
-    else:
-        # do no filter by property if property is not chosen from dropdown
-        if properties_to_filter is not None:
-            #if E1t is chosen from property dropdown
-            if 3 in properties_to_filter:
-                dff = dff[
-                    (property_range_value_E1t[0] < dff['E1t']) & (dff['E1t'] < property_range_value_E1t[1])
-                ]
-    
 
+    for i in properties_to_filter:
+        dff = dff.filter_by_property(i, ranges[i])
+    
     #filter by test condition
     if test_condition_value is None:
         return dff.to_dict("rows")
