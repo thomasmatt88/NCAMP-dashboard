@@ -13,7 +13,6 @@ from views.layout import Layout
 from dataframe import material_df, property_df
 from app import app
 import controllers.property_filters
-from helpers.filters import filter_by_material, sort_dataframe
 
 #this element will contain all our other elements 
 app.layout = Layout
@@ -56,10 +55,11 @@ def update_material_property_table(
     property_range_value_F1tu, property_range_value_F2tu, property_range_value_E1t):
 
     #sort dataframe
-    dff = sort_dataframe(sort_by, property_df)
+    dff = property_df.sort_dataframe(sort_by)
     
     #filter by material
-    dff = filter_by_material(material_value, dff)
+    #dff = filter_by_material(material_value, dff)
+    dff = dff.filter_by_material(material_value)
     
     #filter by material property range
     if property_range_value_F1tu is None:
