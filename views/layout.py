@@ -22,7 +22,17 @@ material_dropdown = dcc.Dropdown(
 
 material_table = dash_table.DataTable(
         id = 'material-table', #need to reference for callback
-        columns = [{"name": i, "id": i} for i in material_df.drop(columns = 'id').columns], #don't need id column
+        columns = [
+            {"name": ["Material", ""], "id": "Material"},
+            {"name": ["Fiber", ""], "id": "Fiber"},
+            {"name": ["Resin", ""], "id": "Resin"},
+            {"name": ["MOT", "°F"], "id": "MOT"},
+            {"name": ["Tg", "°F"], "id": "Tg"},
+            {"name": ["WetTg", "°F"], "id": "WetTg"},
+            {"name": ["FAW", "g/m\N{SUPERSCRIPT TWO}"], "id": "FAW"},
+            {"name": ["MaterialSpec", ""], "id": "MaterialSpec"},
+            {"name": ["ProcessSpec", ""], "id": "ProcessSpec"}
+        ], 
         data = material_df.drop(columns = 'id').to_dict("rows"),
         style_header = {
             'fontWeight': 'bold'

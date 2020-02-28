@@ -30,7 +30,7 @@ pdf = pdf.drop(columns = ['Material'])
 pdf.insert(0, 'Material', temp)
 
 # add units header to df and pdf
-material_df = material_df.rename(columns = {"MOT": "MOT (°F)", "Tg": "Tg (°F)", "WetTg" :"WetTg(°F)", "FAW": "FAW (g/m^2)"})
+#material_df = material_df.rename(columns = {"MOT": "MOT (°F)", "Tg": "Tg (°F)", "WetTg" :"WetTg(°F)", "FAW": "FAW (g/m^2)"})
 """
 pdf = pdf.rename(columns  = {"F1tu": "F1tu (ksi)", "F2tu": "F2tu (ksi)", "E1t": "E1t (msi)", \
     "F1cu": "F1cu (ksi)", "F2cu": "F2cu (ksi)", "F12su": "F12su (ksi)", "F31sbs": "F31sbs (ksi)", \
