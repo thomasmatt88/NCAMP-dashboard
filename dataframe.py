@@ -2,6 +2,7 @@ from sqlalchemy import create_engine
 import pandas as pd
 from models.Dataframe import PropertyDF
 
+#import pymysql
 #db_connection_str = 'mysql+pymysql://root:root@localhost:3306/NCAMP'
 #db_connection = create_engine(db_connection_str)
 

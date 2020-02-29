@@ -114,7 +114,7 @@ property_dropdown = dcc.Dropdown(
 
 property_filters = html.Div(
         [
-            dbc.Button("Test Condition", color = "primary", id="open", style={'margin-right': 10}),
+            dbc.Button("Test Condition", color = "primary", id="open_test_conditions_modal", style={'margin-right': 10}),
             dbc.Button("Material Property", color = "secondary", id = "open_property_modal", style={'margin-right': 10}),
             dbc.Modal(
                 [
@@ -123,10 +123,10 @@ property_filters = html.Div(
                         test_conditions_checklist
                     ),
                     dbc.ModalFooter(
-                        dbc.Button("Close", color = "primary", id="close", className="ml-auto")
+                        dbc.Button("Close", color = "primary", id="close_test_conditions_modal", className="ml-auto")
                     ),
                 ],
-                id="modal",
+                id="test_conditions_modal",
             ),
             dbc.Modal(
                 [
