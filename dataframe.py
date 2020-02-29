@@ -7,11 +7,11 @@ from models.Dataframe import PropertyDF
 #db_connection = create_engine(db_connection_str)
 
 #material_df = pd.read_sql('SELECT * FROM material', con=db_connection)
-material_df = pd.read_pickle('material.pickle')
+material_df = pd.read_pickle('data/material.pickle')
 #df1 = pd.read_sql('SELECT * FROM material_properties', con=db_connection)
-df1 = pd.read_pickle('material_properties.pickle')
+df1 = pd.read_pickle('data/material_properties.pickle')
 #df2 = pd.read_sql('SELECT * FROM test_conditions', con=db_connection)
-df2 = pd.read_pickle('test_conditions.pickle')
+df2 = pd.read_pickle('data/test_conditions.pickle')
 df3 = pd.merge(df1, df2, how = 'inner', left_on = 'test_conditions_id', right_on = 'id')
 df4 = pd.merge(material_df, df3, how = 'inner', left_on = 'id', right_on = 'material_id')
 df5 = df4
