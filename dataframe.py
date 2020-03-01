@@ -37,7 +37,7 @@ pdf = pdf.rename(columns  = {"F1tu": "F1tu (ksi)", "F2tu": "F2tu (ksi)", "E1t": 
     "F1cu": "F1cu (ksi)", "F2cu": "F2cu (ksi)", "F12su": "F12su (ksi)", "F31sbs": "F31sbs (ksi)", \
         "CPT": "CPT (in/ply)", "temperature": "Test Temperature (°F)", "environment": "Test Environment"})
 """
-pdf = pdf.rename(columns  = 
-                                {"temperature": "Test Temperature", "environment": "Test Environment"})
+pdf = pdf.rename(columns  = {"F1cu": PropertyDF.PROPERTIES[4], "temperature": "Test Temperature", \
+                            "environment": "Test Environment"})
 
 property_df = PropertyDF(pdf)

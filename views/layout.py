@@ -56,7 +56,7 @@ property_table = dash_table.DataTable(
             {"name": ["F1tu", "ksi"], "id": "F1tu"},
             {"name": ["F2tu", "ksi"], "id": "F2tu"},
             {"name": ["E1t", "msi"], "id": "E1t"},
-            {"name": ["F1cu", "ksi"], "id": "F1cu"},
+            {"name": [PropertyDF.PROPERTIES[4], "ksi"], "id": PropertyDF.PROPERTIES[4]},
             {"name": ["F2cu", "ksi"], "id": "F2cu"},
             {"name": ["F12su", "ksi"], "id": "F12su"},
             {"name": ["F31sbs", "ksi"], "id": "F31sbs"},
