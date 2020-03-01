@@ -4,93 +4,33 @@ import dash_core_components as dcc
 from dataframe import property_df
 from models.Dataframe import PropertyDF
 
-F1tu = dbc.Modal(
-                [
-                    dbc.ModalHeader("F1tu"),
-                    dbc.ModalBody(
-                        html.Div([
-                            dcc.RangeSlider(
-                                id='my-range-slider-F1tu',
-                                min=property_df['F1tu'].min(),
-                                max=property_df['F1tu'].max(),
-                                step=1,
-                                value=[property_df['F1tu'].min(), property_df['F1tu'].max()]
-                            ),
-                            html.Div(id='output-container-range-slider-F1tu')
-                        ])
-                    ),
-                    dbc.ModalFooter(
-                        dbc.Button("Close", color = "secondary", id="close_property_range_modal_F1tu", className="ml-auto")
-                    ),
-                ],
-                id="property_range_modal_F1tu"
-            )
+modals = {}
 
-F2tu = dbc.Modal(
+for key, value in PropertyDF.PROPERTIES.items():
+    modal = dbc.Modal(
                 [
-                    dbc.ModalHeader("F2tu"),
+                    dbc.ModalHeader(value),
                     dbc.ModalBody(
                         html.Div([
                             dcc.RangeSlider(
-                                id='my-range-slider-F2tu',
-                                min=property_df['F2tu'].min(),
-                                max=property_df['F2tu'].max(),
+                                id='my-range-slider-' + value,
+                                min=property_df[value].min(),
+                                max=property_df[value].max(),
                                 step=1,
-                                value=[property_df['F2tu'].min(), property_df['F2tu'].max()]
+                                value=[property_df[value].min(), property_df[value].max()]
                             ),
-                            html.Div(id='output-container-range-slider-F2tu')
+                            html.Div(id='output-container-range-slider-' + value)
                         ])
                     ),
                     dbc.ModalFooter(
-                        dbc.Button("Close", color = "secondary", id="close_property_range_modal_F2tu", className="ml-auto")
+                        dbc.Button("Close", color = "secondary", id="close_property_range_modal_" + value, className="ml-auto")
                     ),
                 ],
-                id="property_range_modal_F2tu"
+                id="property_range_modal_" + value
             )
-            
-E1t = dbc.Modal(
-                [
-                    dbc.ModalHeader("E1t"),
-                    dbc.ModalBody(
-                        html.Div([
-                            dcc.RangeSlider(
-                                id='my-range-slider-E1t',
-                                min=property_df['E1t'].min(),
-                                max=property_df['E1t'].max(),
-                                step=1,
-                                value=[property_df['E1t'].min(), property_df['E1t'].max()]
-                            ),
-                            html.Div(id='output-container-range-slider-E1t')
-                        ])
-                    ),
-                    dbc.ModalFooter(
-                        dbc.Button("Close", color = "secondary", id="close_property_range_modal_E1t", className="ml-auto")
-                    ),
-                ],
-                id="property_range_modal_E1t"
-            )
-F1cu = dbc.Modal(
-                [
-                    dbc.ModalHeader(PropertyDF.PROPERTIES[4]),
-                    dbc.ModalBody(
-                        html.Div([
-                            dcc.RangeSlider(
-                                id='my-range-slider-' + PropertyDF.PROPERTIES[4],
-                                min=property_df[PropertyDF.PROPERTIES[4]].min(),
-                                max=property_df[PropertyDF.PROPERTIES[4]].max(),
-                                step=1,
-                                value=[
-                                    property_df[PropertyDF.PROPERTIES[4]].min(), 
-                                    property_df[PropertyDF.PROPERTIES[4]].max()
-                                ]
-                            ),
-                            html.Div(id='output-container-range-slider-' + PropertyDF.PROPERTIES[4])
-                        ])
-                    ),
-                    dbc.ModalFooter(
-                        dbc.Button("Close", color = "secondary", id="close_property_range_modal_" + PropertyDF.PROPERTIES[4], \
-                            className="ml-auto")
-                    ),
-                ],
-                id="property_range_modal_" + PropertyDF.PROPERTIES[4]
-            )
+    modals[key] = modal
+
+F1tu = modals[1]
+F2tu = modals[2]        
+E1t = modals[3]
+F1cu = modals[4]

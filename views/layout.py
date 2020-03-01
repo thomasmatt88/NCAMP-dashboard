@@ -53,9 +53,9 @@ property_table = dash_table.DataTable(
             {"name": ["Material", ""], "id": "Material"},
             {"name": ["Test Temperature", "°F"], "id": "Test Temperature"},
             {"name": ["Test Environment", ""], "id": "Test Environment"},
-            {"name": ["F1tu", "ksi"], "id": "F1tu"},
-            {"name": ["F2tu", "ksi"], "id": "F2tu"},
-            {"name": ["E1t", "msi"], "id": "E1t"},
+            {"name": [PropertyDF.PROPERTIES[1], "ksi"], "id": PropertyDF.PROPERTIES[1]},
+            {"name": [PropertyDF.PROPERTIES[2], "ksi"], "id": PropertyDF.PROPERTIES[2]},
+            {"name": [PropertyDF.PROPERTIES[3], "msi"], "id": PropertyDF.PROPERTIES[3]},
             {"name": [PropertyDF.PROPERTIES[4], "ksi"], "id": PropertyDF.PROPERTIES[4]},
             {"name": ["F2cu", "ksi"], "id": "F2cu"},
             {"name": ["F12su", "ksi"], "id": "F12su"},
@@ -104,12 +104,7 @@ test_conditions_checklist = dcc.Checklist(
 
 property_dropdown = dcc.Dropdown(
         id = 'property-dropdown', #need to reference for callback
-        options=[
-            {'label': 'F1tu', 'value': 1},
-            {'label': 'F2tu', 'value': 2},
-            {'label': 'E1t', 'value': 3},
-            {'label': PropertyDF.PROPERTIES[4], 'value': 4}
-        ],
+        options=[ {'label': value, 'value': key} for key, value in PropertyDF.PROPERTIES.items()],
         placeholder="Select a material property",
         multi = True
 )

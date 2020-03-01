@@ -6,6 +6,7 @@ from views.layout import Layout
 from dataframe import material_df, property_df
 from app import app
 from models.Dataframe import PropertyDF
+import views.property_filter_modals 
 
 dropdown_previous_state = []
 
@@ -67,30 +68,22 @@ def toggle_property_range_modal(n1, n2, n3, n4, n5, \
     dropdown_previous_state = n1
     return False, False, False, False
 
-#F1tu
-@app.callback(
-    Output('output-container-range-slider-F1tu', 'children'),
-    [Input('my-range-slider-F1tu', 'value')])
+
+#all properties with 'ksi' has units
 def update_range_output(value):
     return 'You have selected between {} ksi and {} ksi'.format(value[0], value[1])
-
-#F2tu
-@app.callback(
-    Output('output-container-range-slider-F2tu', 'children'),
-    [Input('my-range-slider-F2tu', 'value')])
-def update_range_output_F2tu(value):
-    return 'You have selected between {} ksi and {} ksi'.format(value[0], value[1])
-
+for key, value in PropertyDF.PROPERTIES.items():
+    if key == 3:
+        continue
+    app.callback(
+        Output('output-container-range-slider-' + value, 'children'),
+        [
+            Input('my-range-slider-' + value, 'value')
+        ]
+    )(update_range_output)
 #E1t
 @app.callback(
     Output('output-container-range-slider-E1t', 'children'),
     [Input('my-range-slider-E1t', 'value')])
 def update_range_output_E1t(value):
     return 'You have selected between {} msi and {} msi'.format(value[0], value[1])
-
-#F1cu
-@app.callback(
-    Output('output-container-range-slider-' + PropertyDF.PROPERTIES[4], 'children'),
-    [Input('my-range-slider-' + PropertyDF.PROPERTIES[4], 'value')])
-def update_range_output_F1cu(value):
-    return 'You have selected between {} ksi and {} ksi'.format(value[0], value[1])
