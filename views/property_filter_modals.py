@@ -2,6 +2,7 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_core_components as dcc
 from dataframe import property_df
+from models.Dataframe import PropertyDF
 
 F1tu = dbc.Modal(
                 [
@@ -67,4 +68,29 @@ E1t = dbc.Modal(
                     ),
                 ],
                 id="property_range_modal_E1t"
+            )
+F1cu = dbc.Modal(
+                [
+                    dbc.ModalHeader(PropertyDF.PROPERTIES[4]),
+                    dbc.ModalBody(
+                        html.Div([
+                            dcc.RangeSlider(
+                                id='my-range-slider-' + PropertyDF.PROPERTIES[4],
+                                min=property_df[PropertyDF.PROPERTIES[4]].min(),
+                                max=property_df[PropertyDF.PROPERTIES[4]].max(),
+                                step=1,
+                                value=[
+                                    property_df[PropertyDF.PROPERTIES[4]].min(), 
+                                    property_df[PropertyDF.PROPERTIES[4]].max()
+                                ]
+                            ),
+                            html.Div(id='output-container-range-slider-' + PropertyDF.PROPERTIES[4])
+                        ])
+                    ),
+                    dbc.ModalFooter(
+                        dbc.Button("Close", color = "secondary", id="close_property_range_modal_" + PropertyDF.PROPERTIES[4], \
+                            className="ml-auto")
+                    ),
+                ],
+                id="property_range_modal_" + PropertyDF.PROPERTIES[4]
             )

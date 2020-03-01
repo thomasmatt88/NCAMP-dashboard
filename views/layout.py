@@ -4,6 +4,7 @@ import dash_table
 import dash_bootstrap_components as dbc
 from dataframe import material_df, property_df
 import views.property_filter_modals
+from models.Dataframe import PropertyDF
 
 material_dropdown = dcc.Dropdown(
         id = 'material-dropdown', #need to reference for callback
@@ -106,7 +107,8 @@ property_dropdown = dcc.Dropdown(
         options=[
             {'label': 'F1tu', 'value': 1},
             {'label': 'F2tu', 'value': 2},
-            {'label': 'E1t', 'value': 3}
+            {'label': 'E1t', 'value': 3},
+            {'label': PropertyDF.PROPERTIES[4], 'value': 4}
         ],
         placeholder="Select a material property",
         multi = True
@@ -142,7 +144,8 @@ property_filters = html.Div(
             ),
             views.property_filter_modals.F1tu,
             views.property_filter_modals.F2tu,
-            views.property_filter_modals.E1t
+            views.property_filter_modals.E1t,
+            views.property_filter_modals.F1cu
         ]
 )
 
@@ -151,17 +154,8 @@ Layout = html.Div([
     html.H1("NCAMP Table"),
     html.H3("Select a Material"),
     material_dropdown,
-    #html.Div(
-        #id = "material-selection", #need to reference for callback
-    #), 
     material_table,
     html.H3("Select a Filter"),
     property_filters, 
-    #html.Div(
-       # id = "test-condition-selection", #need to reference for callback
-    #),
-    #html.Div(
-        #id = "material-property-selection", #need to reference for callback
-    #),
     property_table
 ])
