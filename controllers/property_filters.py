@@ -26,8 +26,7 @@ dropdown_previous_state = []
         for key, value in PropertyDF.PROPERTIES.items()
     ],
 )
-def toggle_property_range_modal(n1, n2, n3, n4, n5, \
-     F1tu_is_open, F2tu_is_open, E1t_is_open, F1cu_is_open):
+def toggle_property_range_modal(n1, *args):
     global dropdown_previous_state
     ctx = dash.callback_context
     # n1 is hard to process as NoneType
@@ -46,16 +45,10 @@ def toggle_property_range_modal(n1, n2, n3, n4, n5, \
         # then open the modal of property that was selected
         if len(n1) > len(dropdown_previous_state):
             new_property = set(n1) - set(dropdown_previous_state)
-            if 1 in new_property:
-                F1tu_is_open = True
-            elif 2 in new_property:
-                F2tu_is_open = True
-            elif 3 in new_property:
-                E1t_is_open = True
-            elif 4 in new_property:
-                F1cu_is_open = True
-            dropdown_previous_state = n1
-            return F1tu_is_open, F2tu_is_open, E1t_is_open, F1cu_is_open
+            # return True for modal of property that was selected
+            # return False for all other property modals
+            return [True if i in new_property else False 
+                    for i in range(1, len(PropertyDF.PROPERTIES) + 1)]
     
     #if here, then callback was triggered by closing modal
     # therefore, return False for all modals
