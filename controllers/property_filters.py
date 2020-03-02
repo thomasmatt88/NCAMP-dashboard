@@ -37,10 +37,10 @@ def toggle_property_range_modal(n1, n2, n3, n4, n5, \
     # identify if property-dropdown triggered callback
     if ctx.triggered[0]['prop_id'] == 'property-dropdown.value':
         # if a property was REMOVED via dropdown
-        # then do not open a modal
+        # then do not open a modal (ie return False for all modals)
         if len(dropdown_previous_state) >= len(n1):
             dropdown_previous_state = n1
-            return False, False, False, False
+            return [False for i in range(len(PropertyDF.PROPERTIES))]
     
         # if a property was ADDED via dropdown
         # then open the modal of property that was selected
@@ -57,9 +57,10 @@ def toggle_property_range_modal(n1, n2, n3, n4, n5, \
             dropdown_previous_state = n1
             return F1tu_is_open, F2tu_is_open, E1t_is_open, F1cu_is_open
     
-    #if here then callback was triggered by closing modal
+    #if here, then callback was triggered by closing modal
+    # therefore, return False for all modals
     dropdown_previous_state = n1
-    return False, False, False, False
+    return [False for i in range(len(PropertyDF.PROPERTIES))]
 
 
 #all properties with 'ksi' has units
