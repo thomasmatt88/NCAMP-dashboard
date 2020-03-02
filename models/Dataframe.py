@@ -1,7 +1,7 @@
 import pandas as pd 
 
 class PropertyDF(pd.DataFrame):
-    PROPERTIES = {1: 'F1tu', 2: 'F2tu', 3: 'E1t', 4: 'F1cu'}
+    PROPERTIES = {1: 'F1tu', 2: 'F2tu', 3: 'E1t', 4: 'F1cu', 5: 'F2cu', 6: 'F12su', 7: 'F31sbs'}
 
     @property
     def _constructor(self):

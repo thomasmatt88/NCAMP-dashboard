@@ -137,10 +137,7 @@ property_filters = html.Div(
                 ],
                 id="property_modal",
             ),
-            views.property_filter_modals.F1tu,
-            views.property_filter_modals.F2tu,
-            views.property_filter_modals.E1t,
-            views.property_filter_modals.F1cu
+            *[value for key, value in views.property_filter_modals.modals.items()]
         ]
 )
 

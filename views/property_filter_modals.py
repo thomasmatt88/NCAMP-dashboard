@@ -29,8 +29,3 @@ for key, value in PropertyDF.PROPERTIES.items():
                 id="property_range_modal_" + value
             )
     modals[key] = modal
-
-F1tu = modals[1]
-F2tu = modals[2]        
-E1t = modals[3]
-F1cu = modals[4]
