@@ -16,7 +16,8 @@ for key, value in PropertyDF.PROPERTIES.items():
                                 id='my-range-slider-' + value,
                                 min=property_df[value].min(),
                                 max=property_df[value].max(),
-                                step=1,
+                                # step size should depend on range 
+                                step=0.1 if property_df[value].min() > 1 else 0.0001,
                                 value=[property_df[value].min(), property_df[value].max()]
                             ),
                             html.Div(id='output-container-range-slider-' + value)

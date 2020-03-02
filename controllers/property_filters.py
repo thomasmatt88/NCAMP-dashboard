@@ -56,11 +56,11 @@ def toggle_property_range_modal(n1, *args):
     return [False for i in range(len(PropertyDF.PROPERTIES))]
 
 
-#all properties with 'ksi' has units
+#all properties with 'ksi' as units
 def update_range_output(value):
     return 'You have selected between {} ksi and {} ksi'.format(value[0], value[1])
 for key, value in PropertyDF.PROPERTIES.items():
-    if key == 3:
+    if key == 3 or key == 8:
         continue
     app.callback(
         Output('output-container-range-slider-' + value, 'children'),
@@ -74,3 +74,10 @@ for key, value in PropertyDF.PROPERTIES.items():
     [Input('my-range-slider-E1t', 'value')])
 def update_range_output_E1t(value):
     return 'You have selected between {} msi and {} msi'.format(value[0], value[1])
+
+#CPT
+@app.callback(
+    Output('output-container-range-slider-CPT', 'children'),
+    [Input('my-range-slider-CPT', 'value')])
+def update_range_output_CPT(value):
+    return 'You have selected between {} in/ply and {} in/ply'.format(value[0], value[1])
