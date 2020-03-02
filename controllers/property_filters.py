@@ -13,24 +13,17 @@ dropdown_previous_state = []
 """Property Filter Modals"""
 @app.callback(
     [
-        Output("property_range_modal_F1tu", "is_open"),
-        Output("property_range_modal_F2tu", "is_open"),
-        Output("property_range_modal_E1t", "is_open"),
-        Output("property_range_modal_" + PropertyDF.PROPERTIES[4], "is_open")
-
+        Output("property_range_modal_" + PropertyDF.PROPERTIES[key], "is_open") \
+        for key, value in PropertyDF.PROPERTIES.items()
     ],
     [
         Input('property-dropdown', 'value'), 
-        Input("close_property_range_modal_F1tu", "n_clicks"),
-        Input("close_property_range_modal_F2tu", "n_clicks"),
-        Input("close_property_range_modal_E1t", "n_clicks"),
-        Input("close_property_range_modal_" + PropertyDF.PROPERTIES[4], "n_clicks")
+        *[Input("close_property_range_modal_" + PropertyDF.PROPERTIES[key], "n_clicks") \
+        for key, value in PropertyDF.PROPERTIES.items()]
     ],
     [
-        State("property_range_modal_F1tu", "is_open"),
-        State("property_range_modal_F2tu", "is_open"),
-        State("property_range_modal_E1t", "is_open"),
-        State("property_range_modal_" + PropertyDF.PROPERTIES[4], "is_open")
+        State("property_range_modal_" + PropertyDF.PROPERTIES[key], "is_open") \
+        for key, value in PropertyDF.PROPERTIES.items()
     ],
 )
 def toggle_property_range_modal(n1, n2, n3, n4, n5, \
