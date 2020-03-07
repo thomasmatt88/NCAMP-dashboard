@@ -31,8 +31,8 @@ class PropertyDF(pd.DataFrame):
     
     def filter_by_property(self, prop, prop_range):
         dff = self[
-                (prop_range[0] < self[PropertyDF.PROPERTIES[prop]]) & \
-                    (self[PropertyDF.PROPERTIES[prop]] < prop_range[1])
+                (prop_range[0] <= self[PropertyDF.PROPERTIES[prop]]) & \
+                    (self[PropertyDF.PROPERTIES[prop]] <= prop_range[1])
             ]
         
         return dff
