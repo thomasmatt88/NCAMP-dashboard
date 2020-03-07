@@ -10,7 +10,7 @@ from views.layout import Layout
     Output('material-table', 'data'), #one output id can have one callback
     [
         Input('material-dropdown', 'value'),
-        Input('material-table', 'sort_by')
+        Input('material-table', 'sort_by'),
     ])
 def update_material_table(value, sort_by):
     dff = material_df

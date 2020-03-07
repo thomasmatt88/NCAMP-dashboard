@@ -43,6 +43,9 @@ class MaterialDF(pd.DataFrame):
     def _constructor(self):
         return MaterialDF
     
-    def filter_by_Tg(self, Tg):
-        dff = self[Tg < self["Tg"]]
+    def filter_by_Tg(self, Tg_range):
+        dff = self[
+                (Tg_range[0] <= self['Tg']) & \
+                    (self['Tg'] <= Tg_range[1])
+            ]
         return dff

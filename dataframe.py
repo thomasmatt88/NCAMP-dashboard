@@ -40,4 +40,4 @@ pdf = pdf.rename(columns  = {"F1tu": PropertyDF.PROPERTIES[1], "F2tu": PropertyD
                             "temperature": "Test Temperature", "environment": "Test Environment"})
 
 property_df = PropertyDF(pdf)
-material_df = PropertyDF(mdf)
+material_df = MaterialDF(mdf)
