@@ -105,17 +105,25 @@ test_conditions_checklist = dcc.Checklist(
 property_dropdown = dcc.Dropdown(
         id = 'property-dropdown', #need to reference for callback
         options=[ {'label': value, 'value': key} for key, value in PropertyDF.PROPERTIES.items()],
-        placeholder="Select a material property",
+        placeholder="Select a mechanical property",
+        multi = True
+)
+
+physical_property_dropdown = dcc.Dropdown(
+        id = 'physical-property-dropdown', #need to reference for callback
+        options=[ {'label': 'Tg', 'value': 'Tg'}],
+        placeholder="Select a physical property",
         multi = True
 )
 
 property_filters = html.Div(
         [
             dbc.Button("Test Condition", color = "primary", id="open_test_conditions_modal", style={'margin-right': 10}),
-            dbc.Button("Material Property", color = "secondary", id = "open_property_modal", style={'margin-right': 10}),
+            dbc.Button("Mechanical Property", color = "secondary", id = "open_property_modal", style={'margin-right': 10}),
+            dbc.Button("Physical Property", color = "success", id = "open_physical_property_modal", style={'margin-right': 10}),
             dbc.Modal(
                 [
-                    dbc.ModalHeader("Filter properties by test condition."),
+                    dbc.ModalHeader("Filter by test condition."),
                     dbc.ModalBody(
                         test_conditions_checklist
                     ),
@@ -127,7 +135,7 @@ property_filters = html.Div(
             ),
             dbc.Modal(
                 [
-                    dbc.ModalHeader("Filter properties by property range."),
+                    dbc.ModalHeader("Filter by mechanical property range."),
                     dbc.ModalBody(
                         property_dropdown
                     ),
@@ -137,7 +145,20 @@ property_filters = html.Div(
                 ],
                 id="property_modal",
             ),
-            *[value for key, value in views.property_filter_modals.modals.items()]
+            *[value for key, value in views.property_filter_modals.modals.items()],
+            dbc.Modal(
+                [
+                    dbc.ModalHeader("Filter by physical property range."),
+                    dbc.ModalBody(
+                       physical_property_dropdown
+                    ),
+                    dbc.ModalFooter(
+                        dbc.Button("Close", color = "success", id = "close_physical_property_modal", className = "ml-auto")
+                    )
+                ],
+                id = "physical_property_modal"
+            ),
+            views.property_filter_modals.Tg_modal
         ]
 )
 

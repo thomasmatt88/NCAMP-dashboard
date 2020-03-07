@@ -4,6 +4,7 @@ from flask import jsonify, request, redirect
 from views.layout import Layout
 from app import app
 import controllers.property_filters
+import controllers.physical_property_filters
 import controllers.material_property_table
 import controllers.material_table
 import controllers.filter_modals

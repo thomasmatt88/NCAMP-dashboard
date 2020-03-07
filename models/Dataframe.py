@@ -1,4 +1,5 @@
 import pandas as pd 
+#http://devanla.com/case-for-inheriting-from-pandas-dataframe.html
 
 class PropertyDF(pd.DataFrame):
     PROPERTIES = {1: 'F1tu', 2: 'F2tu', 3: 'E1t', 4: 'F1cu', \
@@ -34,4 +35,14 @@ class PropertyDF(pd.DataFrame):
                     (self[PropertyDF.PROPERTIES[prop]] < prop_range[1])
             ]
         
+        return dff
+
+class MaterialDF(pd.DataFrame):
+
+    @property
+    def _constructor(self):
+        return MaterialDF
+    
+    def filter_by_Tg(self, Tg):
+        dff = self[Tg < self["Tg"]]
         return dff
