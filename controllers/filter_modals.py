@@ -34,3 +34,18 @@ def toggle_property_modal(n1, n2, is_open):
     if n1 or n2:
         return not is_open
     return is_open
+
+@app.callback(
+    Output("physical_property_modal", "is_open"),
+    [
+        Input("open_physical_property_modal", "n_clicks"), 
+        Input("close_physical_property_modal", "n_clicks")
+    ],
+    [
+        State("physical_property_modal", "is_open")
+    ],
+)
+def toggle_physical_property_modal(n1, n2, is_open):
+    if n1 or n2:
+        return not is_open
+    return is_open
