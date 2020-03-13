@@ -4,7 +4,7 @@ import dash_table
 import dash_bootstrap_components as dbc
 from dataframe import material_df, property_df
 import views.property_filter_modals
-from models.Dataframe import PropertyDF
+from models.Dataframe import PropertyDF, MaterialDF
 
 material_dropdown = dcc.Dropdown(
         id = 'material-dropdown', #need to reference for callback
@@ -27,10 +27,10 @@ material_table = dash_table.DataTable(
             {"name": ["Material", ""], "id": "Material"},
             {"name": ["Fiber", ""], "id": "Fiber"},
             {"name": ["Resin", ""], "id": "Resin"},
-            {"name": ["MOT", "°F"], "id": "MOT"},
-            {"name": ["Tg", "°F"], "id": "Tg"},
-            {"name": ["WetTg", "°F"], "id": "WetTg"},
-            {"name": ["FAW", "g/m\N{SUPERSCRIPT TWO}"], "id": "FAW"},
+            {"name": [MaterialDF.PROPERTIES[1], "°F"], "id": MaterialDF.PROPERTIES[1]},
+            {"name": [MaterialDF.PROPERTIES[2], "°F"], "id": MaterialDF.PROPERTIES[2]},
+            {"name": [MaterialDF.PROPERTIES[3], "°F"], "id": MaterialDF.PROPERTIES[3]},
+            {"name": [MaterialDF.PROPERTIES[4], "g/m\N{SUPERSCRIPT TWO}"], "id": MaterialDF.PROPERTIES[4]},
             {"name": ["MaterialSpec", ""], "id": "MaterialSpec"},
             {"name": ["ProcessSpec", ""], "id": "ProcessSpec"}
         ], 
@@ -58,10 +58,10 @@ property_table = dash_table.DataTable(
             {"name": [PropertyDF.PROPERTIES[2], "ksi"], "id": PropertyDF.PROPERTIES[2]},
             {"name": [PropertyDF.PROPERTIES[3], "msi"], "id": PropertyDF.PROPERTIES[3]},
             {"name": [PropertyDF.PROPERTIES[4], "ksi"], "id": PropertyDF.PROPERTIES[4]},
-            {"name": ["F2cu", "ksi"], "id": "F2cu"},
-            {"name": ["F12su", "ksi"], "id": "F12su"},
-            {"name": ["F31sbs", "ksi"], "id": "F31sbs"},
-            {"name": ["CPT", "in/ply"], "id": "CPT"}
+            {"name": [PropertyDF.PROPERTIES[5], "ksi"], "id": PropertyDF.PROPERTIES[5]},
+            {"name": [PropertyDF.PROPERTIES[6], "ksi"], "id": PropertyDF.PROPERTIES[6]},
+            {"name": [PropertyDF.PROPERTIES[7], "ksi"], "id": PropertyDF.PROPERTIES[7]},
+            {"name": [PropertyDF.PROPERTIES[8], "in/ply"], "id": PropertyDF.PROPERTIES[8]}
         ], 
         data = property_df.drop(columns = ['material_id']).to_dict("rows"),
         style_header = {
@@ -105,14 +105,14 @@ test_conditions_checklist = dcc.Checklist(
 
 property_dropdown = dcc.Dropdown(
         id = 'property-dropdown', #need to reference for callback
-        options=[ {'label': value, 'value': key} for key, value in PropertyDF.PROPERTIES.items()],
+        options=[{'label': value, 'value': key} for key, value in PropertyDF.PROPERTIES.items()],
         placeholder="Select a mechanical property",
         multi = True
 )
 
 physical_property_dropdown = dcc.Dropdown(
         id = 'physical-property-dropdown', #need to reference for callback
-        options=[ {'label': 'Tg', 'value': 'Tg'}],
+        options=[{'label': value, 'value': key} for key, value in MaterialDF.PROPERTIES.items()],
         placeholder="Select a physical property",
         multi = True
 )
@@ -159,7 +159,7 @@ property_filters = html.Div(
                 ],
                 id = "physical_property_modal"
             ),
-            views.property_filter_modals.Tg_modal
+            *[value for key, value in views.property_filter_modals.phys_modals.items()]
         ]
 )
 

@@ -38,14 +38,24 @@ class PropertyDF(pd.DataFrame):
         return dff
 
 class MaterialDF(pd.DataFrame):
+    
+    PROPERTIES = {1: 'MOT', 2: 'Tg', 3: 'WetTg', 4: 'FAW'}
 
     @property
     def _constructor(self):
         return MaterialDF
     
-    def filter_by_Tg(self, Tg_range):
+    # def filter_by_Tg(self, Tg_range):
+    #     dff = self[
+    #             (Tg_range[0] <= self['Tg']) & \
+    #                 (self['Tg'] <= Tg_range[1])
+    #         ]
+    #     return dff
+
+    def filter_by_physical_property(self, prop, prop_range):
         dff = self[
-                (Tg_range[0] <= self['Tg']) & \
-                    (self['Tg'] <= Tg_range[1])
+                (prop_range[0] <= self[MaterialDF.PROPERTIES[prop]]) & \
+                    (self[MaterialDF.PROPERTIES[prop]] <= prop_range[1])
             ]
+    
         return dff
