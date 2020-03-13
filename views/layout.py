@@ -44,7 +44,8 @@ material_table = dash_table.DataTable(
             "maxWidth": '85%',
             "margin-left": 'auto',
             "margin-right": 'auto'
-        }
+        },
+        tooltip={'Material': 'this is a test tooltip' }
 )
 
 property_table = dash_table.DataTable(
