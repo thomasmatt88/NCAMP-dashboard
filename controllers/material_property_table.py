@@ -35,6 +35,13 @@ def update_material_property_table(
         parameter = [] if parameter is None else parameter
         ranges[i + 1] = parameter
 
+    # convert phys range slider values into dictionary for physcial property filtering
+    phys_ranges = {}
+    phys_ranges[1] = MOT_range
+    phys_ranges[2] = Tg_range
+    phys_ranges[3] = WetTg_range
+    phys_ranges[4] = FAW_range
+
     # NoneType is difficult to process
     properties_to_filter = [] if properties_to_filter is None else properties_to_filter
     physical_properties_to_filter = [] if physical_properties_to_filter is None else physical_properties_to_filter
@@ -42,33 +49,14 @@ def update_material_property_table(
     #sort dataframe
     dff = property_df.sort_dataframe(sort_by)
 
-    # filter material_df by MOT
+    mdff = material_df
+    # filter material_df by physical property range
     # then make sure material_df and property_df contain the same materials
-    if 1 in physical_properties_to_filter:
-        #mdff = material_df.filter_by_Tg(Tg_range)
-        mdff = material_df.filter_by_physical_property(1, MOT_range)
-        dff = dff[dff['Material'].isin(mdff['Material'])]
-
-    # filter material_df by Tg
-    # then make sure material_df and property_df contain the same materials
-    if 2 in physical_properties_to_filter:
-        #mdff = material_df.filter_by_Tg(Tg_range)
-        mdff = material_df.filter_by_physical_property(2, Tg_range)
-        dff = dff[dff['Material'].isin(mdff['Material'])]
-    
-    # filter material_df by WetTg
-    # then make sure material_df and property_df contain the same materials
-    if 3 in physical_properties_to_filter:
-        #mdff = material_df.filter_by_Tg(Tg_range)
-        mdff = material_df.filter_by_physical_property(3, WetTg_range)
-        dff = dff[dff['Material'].isin(mdff['Material'])]
-    
-    # filter material_df by WetTg
-    # then make sure material_df and property_df contain the same materials
-    if 4 in physical_properties_to_filter:
-        #mdff = material_df.filter_by_Tg(Tg_range)
-        mdff = material_df.filter_by_physical_property(4, FAW_range)
-        dff = dff[dff['Material'].isin(mdff['Material'])]
+    for i in range(1, 5):
+        if i in physical_properties_to_filter:
+            #mdff = material_df.filter_by_Tg(Tg_range)
+            mdff = mdff.filter_by_physical_property(i, phys_ranges[i])
+            dff = dff[dff['Material'].isin(mdff['Material'])]
     
     #filter by material
     dff = dff.filter_by_material(material_value)
