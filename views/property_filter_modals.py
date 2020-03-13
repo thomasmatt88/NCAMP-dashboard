@@ -32,28 +32,6 @@ for key, value in PropertyDF.PROPERTIES.items():
             )
     modals[key] = modal
 
-# Tg_modal = dbc.Modal(
-#             [
-#                 dbc.ModalHeader('Tg'),
-#                 dbc.ModalBody(
-#                     html.Div([
-#                         dcc.RangeSlider(
-#                             id='my-range-slider-Tg',
-#                             min=material_df['Tg'].min(),
-#                             max=material_df['Tg'].max(),
-#                             # step size should depend on range 
-#                             step=0.1,
-#                             value=[material_df['Tg'].min(), material_df['Tg'].max()]
-#                         ),
-#                         html.Div(id='output-container-range-slider-Tg')
-#                     ])
-#                 ),
-#                 dbc.ModalFooter(
-#                     dbc.Button("Close", color = "success", id="close_property_range_modal_Tg", className="ml-auto")
-#                 ),
-#             ],
-#             id="physical_property_range_modal_Tg"
-#       )
 for key, value in MaterialDF.PROPERTIES.items():
     phys_modal = dbc.Modal(
                 [

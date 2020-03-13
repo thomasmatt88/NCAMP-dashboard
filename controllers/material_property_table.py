@@ -15,10 +15,10 @@ from models.Dataframe import PropertyDF, MaterialDF
         Input('material-dropdown', 'value'),
         Input('property-dropdown', 'value'),
         Input('physical-property-dropdown', 'value'),
-        Input('my-range-slider-MOT', 'value'),
-        Input('my-range-slider-Tg', 'value'),
-        Input('my-range-slider-WetTg', 'value'),
-        Input('my-range-slider-FAW', 'value'),
+        Input('my-range-slider-' + MaterialDF.PROPERTIES[1], 'value'),
+        Input('my-range-slider-' + MaterialDF.PROPERTIES[2], 'value'),
+        Input('my-range-slider-' + MaterialDF.PROPERTIES[3], 'value'),
+        Input('my-range-slider-' + MaterialDF.PROPERTIES[4], 'value'),
         *[Input("my-range-slider-" + PropertyDF.PROPERTIES[key], 'value') \
         for key, value in PropertyDF.PROPERTIES.items()],
     ]
