@@ -9,6 +9,7 @@ from models.Dataframe import PropertyDF, MaterialDF
 material_dropdown = dcc.Dropdown(
         id = 'material-dropdown', #need to reference for callback
         options=[
+        {'label': 'All Materials', 'value': 'all'},
         {'label': 'Hexcel AS4/8552 unidirectional tape', 'value': 1},
         {'label': 'Hexcel AS4 3k/8552 plain weave', 'value': 2},
         {'label': 'Hexcel IM7/8552 unidirectional tape', 'value': 3},

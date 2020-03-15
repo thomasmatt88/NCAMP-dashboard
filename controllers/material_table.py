@@ -16,5 +16,7 @@ def update_material_table(value, sort_by):
     dff = material_df
     if value is None:
         return dff[dff['id'] == value].to_dict("rows") #one value at a time
+    if 'all' in value: # if all materials are selected
+        return dff.to_dict("rows") 
     else:
         return dff[dff['id'].isin(value)].to_dict("rows")

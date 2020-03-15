@@ -45,6 +45,7 @@ def update_material_property_table(
     # NoneType is difficult to process
     properties_to_filter = [] if properties_to_filter is None else properties_to_filter
     physical_properties_to_filter = [] if physical_properties_to_filter is None else physical_properties_to_filter
+    material_value = [] if material_value is None else material_value
 
     #sort dataframe
     dff = property_df.sort_dataframe(sort_by)
@@ -58,8 +59,10 @@ def update_material_property_table(
             mdff = mdff.filter_by_physical_property(i, phys_ranges[i])
             dff = dff[dff['Material'].isin(mdff['Material'])]
     
-    #filter by material
-    dff = dff.filter_by_material(material_value)
+    # no need to filter by material if 'all materials' selected
+    if 'all' not in material_value: 
+        #filter by material
+        dff = dff.filter_by_material(material_value)
 
     #filter by property
     for i in properties_to_filter:
