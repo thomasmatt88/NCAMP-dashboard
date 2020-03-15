@@ -16,7 +16,15 @@ material_dropdown = dcc.Dropdown(
         {'label': 'Newport MR60H/ NCT4708 unidirectional tape', 'value': 4},
         {'label': 'HTS40 E13 3k/MTM45-1 plain weave fabric', 'value': 5},
         {'label': '6781 S-2/MTM45-1 8-harness satin weave fabric', 'value': 6},
-        {'label': 'E-Glass 7781/MTM45-1 8-harness satin weave fabric', 'value': 7}
+        {'label': 'E-Glass 7781/MTM45-1 8-harness satin weave fabric', 'value': 7},
+        {'label': 'Cytec 5320-1 T650 Unitape Gr 145 RC 33%', 'value': 8},
+        {'label': 'Cytec 5320-1 T650 3k-PW fabric', 'value': 9},
+        {'label': 'EP2202 IM7G Unitape Gr 190 RC 33%', 'value': 10},
+        {'label': 'Cytec Cycom EP2202 T650 3k-PW fabric with RC 38%', 'value': 11},
+        {'label': 'TenCate BT250E-6 S2 Unitape Gr 284gsm 33% RC', 'value': 12},
+        {'label': 'TenCate BT250E-6 IM7 GP 12k Unitape Gr 148gsm 33% RC', 'value': 13},
+        {'label': 'TenCate BT250E-6 AS4C 3k-PW Fabric 195gsm 40% RC', 'value': 14},
+        {'label': 'TCAC12k HTS SFP OSI-TC250 42% fabric prepreg', 'value': 15},
         ],
         placeholder="Select a material",
         multi = True
