@@ -1,22 +1,47 @@
 import dash
 from dash.dependencies import Input, Output, State
+import dash_html_components as html
 
 #from other modules
 from dataframe import material_df
 from app import app
 from views.layout import Layout
 
+def Table(dataframe):
+    rows = []
+    for i in range(len(dataframe)):
+        row = []
+        for col in dataframe.columns:
+            value = dataframe.iloc[i][col]
+            # update this depending on which
+            # columns you want to show links for
+            # and what you want those links to be
+            # if col == 'id':
+            #     cell = html.Td(html.A(href=value, children=value))
+            # else:
+            cell = html.Td(children=value)
+            row.append(cell)
+        rows.append(html.Tr(row))
+    return html.Table(
+        # Header
+        [html.Tr([html.Th(col) for col in dataframe.columns])] +
+
+        rows
+    )
+
 @app.callback(
-    Output('material-table', 'data'), #one output id can have one callback
+    Output('material-table', 'children'), #one output id can have one callback
     [
-        Input('material-dropdown', 'value'),
-        Input('material-table', 'sort_by'),
+        Input('material-dropdown', 'value')
     ])
-def update_material_table(value, sort_by):
+def update_material_table(value):
     dff = material_df
     if value is None:
-        return dff[dff['id'] == value].to_dict("rows") #one value at a time
+        return Table(dff[dff['id'] == value].drop(columns = ["id"])) #one value at a time
     if 'all' in value: # if all materials are selected
-        return dff.to_dict("rows") 
+        return Table(dff.drop(columns = ["id"]))
     else:
-        return dff[dff['id'].isin(value)].to_dict("rows")
+        return Table(dff[dff['id'].isin(value)].drop(columns = ["id"]))
+
+
+#Table(material_df.drop(columns = ["id"]))

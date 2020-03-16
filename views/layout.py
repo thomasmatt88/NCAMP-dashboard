@@ -30,32 +30,45 @@ material_dropdown = dcc.Dropdown(
         multi = True
 )
 
-material_table = dash_table.DataTable(
-        id = 'material-table', #need to reference for callback
-        columns = [
-            {"name": ["Material", ""], "id": "Material"},
-            {"name": ["Fiber", ""], "id": "Fiber"},
-            {"name": ["Resin", ""], "id": "Resin"},
-            {"name": [MaterialDF.PROPERTIES[1], "°F"], "id": MaterialDF.PROPERTIES[1]},
-            {"name": [MaterialDF.PROPERTIES[2], "°F"], "id": MaterialDF.PROPERTIES[2]},
-            {"name": [MaterialDF.PROPERTIES[3], "°F"], "id": MaterialDF.PROPERTIES[3]},
-            {"name": [MaterialDF.PROPERTIES[4], "g/m\N{SUPERSCRIPT TWO}"], "id": MaterialDF.PROPERTIES[4]},
-            {"name": ["MaterialSpec", ""], "id": "MaterialSpec"},
-            {"name": ["ProcessSpec", ""], "id": "ProcessSpec"}
-        ], 
-        data = material_df.drop(columns = 'id').to_dict("rows"),
-        style_header = {
-            'fontWeight': 'bold'
-        },
-        style_table={
-            'margin-top': '35px',
-            'margin-bottom': '35px',
-            "maxWidth": '85%',
-            "margin-left": 'auto',
-            "margin-right": 'auto'
-        },
-        tooltip={'Material': 'this is a test tooltip' }
-)
+# material_table = dash_table.DataTable(
+#         id = 'material-table', #need to reference for callback
+#         columns = [
+#             {"name": ["Material", ""], "id": "Material"},
+#             {"name": ["Fiber", ""], "id": "Fiber"},
+#             {"name": ["Resin", ""], "id": "Resin"},
+#             {"name": [MaterialDF.PROPERTIES[1], "°F"], "id": MaterialDF.PROPERTIES[1]},
+#             {"name": [MaterialDF.PROPERTIES[2], "°F"], "id": MaterialDF.PROPERTIES[2]},
+#             {"name": [MaterialDF.PROPERTIES[3], "°F"], "id": MaterialDF.PROPERTIES[3]},
+#             {"name": [MaterialDF.PROPERTIES[4], "g/m\N{SUPERSCRIPT TWO}"], "id": MaterialDF.PROPERTIES[4]},
+#             {"name": ["MaterialSpec", ""], "id": "MaterialSpec"},
+#             {"name": ["ProcessSpec", ""], "id": "ProcessSpec"}
+#         ], 
+#         data = material_df.drop(columns = 'id').to_dict("rows"),
+#         style_header = {
+#             'fontWeight': 'bold'
+#         },
+#         style_table={
+#             'margin-top': '35px',
+#             'margin-bottom': '35px',
+#             "maxWidth": '85%',
+#             "margin-left": 'auto',
+#             "margin-right": 'auto'
+#         },
+#         tooltip_data=[{
+#                 #col: f"{col} {i} th row"
+#                 col: material_df["Material"][i] + "\n" + material_df["MaterialSpec"][i]
+#                 for col in material_df.columns} for i in range(0,material_df.shape[0])],
+#         tooltip_duration = None,
+#         tooltip = {
+#             'type': 'markdown'
+#         }
+#         #tooltip={
+#             #'Material': 'this is a test tooltip' 
+#         #}
+# )
+
+material_table = html.Div(id = 'material-table')
+
 
 property_table = dash_table.DataTable(
         id = 'material-property-table', #need to reference for callback
