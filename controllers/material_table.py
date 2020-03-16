@@ -6,6 +6,7 @@ import dash_html_components as html
 from dataframe import material_df
 from app import app
 from views.layout import Layout
+from data.process_spec import link_map
 
 def Table(dataframe):
     rows = []
@@ -16,10 +17,10 @@ def Table(dataframe):
             # update this depending on which
             # columns you want to show links for
             # and what you want those links to be
-            # if col == 'id':
-            #     cell = html.Td(html.A(href=value, children=value))
-            # else:
-            cell = html.Td(children=value)
+            if col == 'ProcessSpec':
+                cell = html.Td(html.A(href = link_map[value], children = value))
+            else:
+                cell = html.Td(children=value)
             row.append(cell)
         rows.append(html.Tr(row))
     return html.Table(
