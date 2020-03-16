@@ -4,7 +4,7 @@ import os
 
 
 #app = dash.Dash(__name__)
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, 'https://codepen.io/chriddyp/pen/dZVMbK.css'])
 server = app.server #need to add this line for heroku deployment
 server.secret_key = os.environ.get('secret_key', 'secret')
 app.config.suppress_callback_exceptions = True
