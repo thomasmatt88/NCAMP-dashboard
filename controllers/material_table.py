@@ -29,13 +29,13 @@ def Table(dataframe):
         rows.append(html.Tr(row))
     return html.Table(
         # Header
-        [html.Tr([html.Th(col) for col in dataframe.columns])] +
+        [html.Tr([html.Th(col, className = "Header") for col in dataframe.columns])] +
         [html.Tr(
             [
-                html.Th(""), html.Th(""), html.Th(""), \
-                html.Th("°F"), html.Th("°F"), html.Th("°F"), \
-                html.Th("g/m\N{SUPERSCRIPT TWO}"), \
-                html.Th(""), html.Th("")
+                html.Th("", className = "Header"), html.Th("", className = "Header"), html.Th("", className = "Header"), \
+                html.Th("°F", className = "Header"), html.Th("°F", className = "Header"), html.Th("°F", className = "Header"), \
+                html.Th("g/m\N{SUPERSCRIPT TWO}", className = "Header"), \
+                html.Th("", className = "Header"), html.Th("", className = "Header")
             ]
         )] +
         rows

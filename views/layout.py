@@ -102,8 +102,8 @@ property_table = dash_table.DataTable(
             #"maxWidth": '85%',
             'table-layout': 'fixed',
             'width': '90%',
-            "marginLeft": 'auto',
-            "marginRight": 'auto'
+            "margin-left": 'auto',
+            "margin-right": 'auto'
         },
         
         style_cell_conditional = [
@@ -130,7 +130,7 @@ test_conditions_checklist = dcc.Checklist(
                                 {'label': '200°F, wet', 'value': 7}
                             
                             ],
-                            inputStyle={"marginLeft": "20px", "marginRight": "10px"}
+                            inputStyle={"margin-left": "20px", "margin-right": "10px"}
 )
 
 property_dropdown = dcc.Dropdown(
