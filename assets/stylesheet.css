@@ -1,4 +1,4 @@
-.Table, .Header, .Material_Header, .Fiber_Header, td{
+.Table, .Header, td{
     font-family: 'Tahoma';
     font-size: medium;
     text-align: right;
@@ -23,7 +23,7 @@
     width: 25%;
 }
 
-.Header, .Material_Header, .Fiber_Header {
+.Header {
     background-color: #FAFAFA;
     /*width: 100%; make header 100% of table container*/
     padding: 10px;
@@ -33,7 +33,7 @@ td {
     padding: 5px;
 }
 
-.Header, .Material_Header, .Fiber_Header, td {
+.Header, td {
     border: 1px solid #D3D3D3;
 }
 

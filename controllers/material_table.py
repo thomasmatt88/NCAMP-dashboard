@@ -32,7 +32,8 @@ def Table(dataframe):
         [html.Tr([html.Th(col, className = "Header") for col in dataframe.columns])] +
         [html.Tr(
             [
-                html.Th("", className = "Material_Header"), html.Th("", className = "Fiber_Header"), html.Th("", className = "Header"), \
+                html.Th("", className = "Material_Header Header"), html.Th("", className = "Fiber_Header Header"), \
+                html.Th("", className = "Header"), \
                 html.Th("°F", className = "Header"), html.Th("°F", className = "Header"), html.Th("°F", className = "Header"), \
                 html.Th("g/m\N{SUPERSCRIPT TWO}", className = "Header"), \
                 html.Th("", className = "Header"), html.Th("", className = "Header")
