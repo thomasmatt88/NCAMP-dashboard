@@ -99,7 +99,9 @@ property_table = dash_table.DataTable(
         },
         style_table={
             'padding-top': '35px',
-            "maxWidth": '85%',
+            #"maxWidth": '85%',
+            'table-layout': 'fixed',
+            'width': '90%',
             "marginLeft": 'auto',
             "marginRight": 'auto'
         },
