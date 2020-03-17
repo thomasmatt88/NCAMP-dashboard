@@ -30,7 +30,14 @@ def Table(dataframe):
     return html.Table(
         # Header
         [html.Tr([html.Th(col) for col in dataframe.columns])] +
-
+        [html.Tr(
+            [
+                html.Th(""), html.Th(""), html.Th(""), \
+                html.Th("°F"), html.Th("°F"), html.Th("°F"), \
+                html.Th("g/m\N{SUPERSCRIPT TWO}"), \
+                html.Th(""), html.Th("")
+            ]
+        )] +
         rows
     )
 

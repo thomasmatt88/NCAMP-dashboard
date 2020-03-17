@@ -3,8 +3,8 @@ import dash_bootstrap_components as dbc
 import os
 
 
-#app = dash.Dash(__name__)
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, 'https://codepen.io/chriddyp/pen/dZVMbK.css'])
+#app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, 'https://codepen.io/chriddyp/pen/dZVMbK.css'])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server #need to add this line for heroku deployment
 server.secret_key = os.environ.get('secret_key', 'secret')
 app.config.suppress_callback_exceptions = True

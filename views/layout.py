@@ -67,7 +67,7 @@ material_dropdown = dcc.Dropdown(
 #         #}
 # )
 
-material_table = html.Div(id = 'material-table')
+material_table = html.Div(id = 'material-table', className = "Table")
 
 
 property_table = dash_table.DataTable(
@@ -88,21 +88,27 @@ property_table = dash_table.DataTable(
         data = property_df.drop(columns = ['material_id']).to_dict("rows"),
         style_header = {
             'fontWeight': 'bold',
-            'whiteSpace': 'normal'
+            'whiteSpace': 'normal',
+            'padding': '10px',
             #'height': 'auto'
+        },
+        style_cell = {
+            'font-family': 'tahoma',
+            'font-size': 'medium',
+            'padding': '5px',
         },
         style_table={
             'padding-top': '35px',
             "maxWidth": '85%',
-            "margin-left": 'auto',
-            "margin-right": 'auto'
+            "marginLeft": 'auto',
+            "marginRight": 'auto'
         },
         
         style_cell_conditional = [
             {'if': {'column_id': 'Test Temperature'},
-            'maxWidth': '90px'},
+            'maxWidth': '120px'},
             {'if': {'column_id': 'Test Environment'},
-            'maxWidth': '90px'}
+            'maxWidth': '120px'}
         ],
         
         sort_action = 'custom',
@@ -122,7 +128,7 @@ test_conditions_checklist = dcc.Checklist(
                                 {'label': '200°F, wet', 'value': 7}
                             
                             ],
-                            inputStyle={"margin-left": "20px", "margin-right": "10px"}
+                            inputStyle={"marginLeft": "20px", "marginRight": "10px"}
 )
 
 property_dropdown = dcc.Dropdown(

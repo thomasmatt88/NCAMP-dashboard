@@ -1,0 +1,30 @@
+.Table, th, td{
+    font-family: 'Tahoma';
+    font-size: medium;
+    text-align: right;
+    
+    /*max-width: 85%;
+    min-width: 1000px;
+    margin-left: auto;
+    margin-right: 'auto';*/
+}
+
+.Table {
+    table-layout: fixed;
+    width: 90%; /*make table 90% of div container*/
+    margin: 0 auto; /*center table inside of div container*/
+}
+
+th {
+    background-color: #FAFAFA;
+    width: 100%; /*make header 100% of table container*/
+    padding: 10px;
+}
+
+td {
+    padding: 5px;
+}
+
+th, td {
+    border: 1px solid #D3D3D3;
+}
