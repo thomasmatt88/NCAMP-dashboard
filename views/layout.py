@@ -62,7 +62,7 @@ material_table = dash_table.DataTable(
 property_table = dash_table.DataTable(
         id = 'material-property-table', #need to reference for callback
         columns = [
-            {"name": ["Material", ""], "id": "Material"},
+            {"name": ["Material", ""], "id": "Material", "type" : 'text', "presentation" : 'markdown'},
             {"name": ["Test Temperature", "°F"], "id": "Test Temperature"},
             {"name": ["Test Environment", ""], "id": "Test Environment"},
             {"name": [PropertyDF.PROPERTIES[1], "ksi"], "id": PropertyDF.PROPERTIES[1]},
