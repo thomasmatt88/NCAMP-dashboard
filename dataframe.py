@@ -1,6 +1,8 @@
 from sqlalchemy import create_engine
 import pandas as pd
+
 from models.Dataframe import PropertyDF, MaterialDF
+from data import material_links
 
 #import pymysql
 #db_connection_str = 'mysql+pymysql://root:root@localhost:3306/NCAMP'
@@ -39,9 +41,8 @@ pdf = pdf.rename(columns  = {"F1tu": PropertyDF.PROPERTIES[1], "F2tu": PropertyD
                             "F31sbs": PropertyDF.PROPERTIES[7], "CPT": PropertyDF.PROPERTIES[8], \
                             "temperature": "Test Temperature", "environment": "Test Environment"})
 
-# add markdown links to Material colum
-# add links to material column
-pdf['Material'] = pdf['Material'].map({'Hexcel AS4/8552 unidirectional tape': '[Hexcel AS4/8552 unidirectional tape](https://google.com)'})
+# add markdown links to Material column
+pdf['Material'] = pdf['Material'].map(material_links.link_map)
 
 property_df = PropertyDF(pdf)
 material_df = MaterialDF(mdf)
