@@ -39,9 +39,35 @@ def toggle_property_range_modal_phys(n1, n2, n3, n4, n5, n6, n7, *args):
     mech_props = ["{}: {}, {}\t".format(PropertyDF.PROPERTIES[i], mech_props_ranges[i - 1][0], mech_props_ranges[i - 1][1]) for i in n2]
     phys_props = ["{}: {}, {}\t".format(MaterialDF.PROPERTIES[i], phys_props_ranges[i - 1][0], phys_props_ranges[i - 1][1]) for i in n3]
 
+    # turn lists into html
+    test_conds_html = [
+                        html.P(test_cond, 
+                        style = {"color": "#007bff", "border-style": "solid", \
+                                "border-width": "1px", "display" : "inline-block", \
+                                "margin" : "2px", "padding" : "2px"}) 
+                        for test_cond in test_conds
+                    ]
+    mech_props_html = [
+                        html.P(mech_prop, 
+                        style = {"color": "#6c757d", "border-style": "solid", \
+                                "border-width": "1px", "display" : "inline-block", \
+                                "margin" : "2px", "padding" : "2px"})
+                        for mech_prop in mech_props
+                    ]
+    phys_props_html = [
+                        html.P(phys_prop, 
+                        style = {"color": "#28a745", "border-style": "solid", \
+                                "border-width": "1px", "display" : "inline-block", \
+                                "margin" : "2px", "padding" : "2px"})
+                        for phys_prop in phys_props
+                    ]
+
     return html.Div([
-        html.P("".join(test_conds), style = {"color": "#007bff"}),
+        #html.P("".join(test_conds), style = {"color": "#007bff"}),
+        *test_conds_html,
         #html.P("".join(mech_props), style = {"color": "#6c757d", "border-style": "solid", "border-width": "1px"}),
-        html.P("".join(mech_props), style = {"color": "#6c757d"}),
-        html.P("".join(phys_props), style = {"color": "#28a745"})
+        #html.P("".join(mech_props), style = {"color": "#6c757d"}),
+        *mech_props_html,
+        #html.P("".join(phys_props), style = {"color": "#28a745"})
+        *phys_props_html
     ])
