@@ -183,5 +183,6 @@ Layout = html.Div([
     material_table,
     html.H3("Select a Filter"),
     property_filters, 
+    html.Div(id = "filter-selections-container"), # need to reference id for callback
     property_table
 ])
