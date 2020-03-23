@@ -41,10 +41,17 @@ pdf = pdf.rename(columns  = {"F1tu": PropertyDF.PROPERTIES[1], "F2tu": PropertyD
                             "F31sbs": PropertyDF.PROPERTIES[7], "CPT": PropertyDF.PROPERTIES[8], \
                             "temperature": "Test Temperature", "environment": "Test Environment"})
 
-# add markdown links to Material column
+# add markdown links to Material column of property df
 pdf['Material'] = pdf['Material'].map(material_links.link_map)
+
+# create deep copy of mdf and add markdown links for comparison to pdf
+mdf_links = pd.DataFrame.copy(mdf)
+# add markdown links to Material column of mdf_links
+mdf_links['Material'] = mdf_links['Material'].map(material_links.link_map)
+
 
 #export these dataframes
 test_conditions_df = df2.set_index('id')
 property_df = PropertyDF(pdf)
 material_df = MaterialDF(mdf)
+material_df_links = MaterialDF(mdf_links)

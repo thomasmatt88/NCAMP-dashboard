@@ -2,7 +2,7 @@ import dash
 from dash.dependencies import Input, Output, State
 
 #from other modules
-from dataframe import property_df, material_df
+from dataframe import property_df, material_df_links
 from app import app
 from views.layout import Layout
 from models.Dataframe import PropertyDF, MaterialDF
@@ -50,9 +50,9 @@ def update_material_property_table(
     #sort dataframe
     dff = property_df.sort_dataframe(sort_by)
 
-    mdff = material_df
-    # filter material_df by physical property range
-    # then make sure material_df and property_df contain the same materials
+    mdff = material_df_links
+    # filter material_df_links by physical property range
+    # then make sure material_df_links and property_df contain the same materials
     for i in range(1, 5):
         if i in physical_properties_to_filter:
             #mdff = material_df.filter_by_Tg(Tg_range)
