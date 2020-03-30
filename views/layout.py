@@ -42,8 +42,8 @@ material_table = dash_table.DataTable(
             {"name": [MaterialDF.PROPERTIES[2], "°F"], "id": MaterialDF.PROPERTIES[2]},
             {"name": [MaterialDF.PROPERTIES[3], "°F"], "id": MaterialDF.PROPERTIES[3]},
             {"name": [MaterialDF.PROPERTIES[4], "g/m\N{SUPERSCRIPT TWO}"], "id": MaterialDF.PROPERTIES[4]},
-            {"name": ["MaterialSpec", ""], "id": "MaterialSpec"},
-            {"name": ["ProcessSpec", ""], "id": "ProcessSpec"}
+            {"name": ["MaterialSpec", ""], "id": "MaterialSpec", "type" : 'text', "presentation" : 'markdown'},
+            {"name": ["ProcessSpec", ""], "id": "ProcessSpec", "type" : 'text', "presentation" : 'markdown'}
         ], 
         data = material_df.drop(columns = 'id').to_dict("rows"),
         style_header = {

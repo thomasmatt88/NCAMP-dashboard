@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 import pandas as pd
 
 from models.Dataframe import PropertyDF, MaterialDF
-from data import material_links
+from data import material_links, process_spec_links, material_spec_links
 
 #import pymysql
 #db_connection_str = 'mysql+pymysql://root:root@localhost:3306/NCAMP'
@@ -43,6 +43,10 @@ pdf = pdf.rename(columns  = {"F1tu": PropertyDF.PROPERTIES[1], "F2tu": PropertyD
 
 # add markdown links to Material column of property df
 pdf['Material'] = pdf['Material'].map(material_links.link_map)
+# add markdown links to ProcessSpec column of material df
+mdf['ProcessSpec'] = mdf['ProcessSpec'].map(process_spec_links.link_map)
+# add markdown links to MaterialSpec column of material df
+mdf['MaterialSpec'] = mdf['MaterialSpec'].map(material_spec_links.link_map)
 
 # create deep copy of mdf and add markdown links for comparison to pdf
 mdf_links = pd.DataFrame.copy(mdf)
