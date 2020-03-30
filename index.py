@@ -7,6 +7,7 @@ import controllers.material_property_table
 import controllers.material_table
 import controllers.filter_modals
 import controllers.filter_selections_div
+import controllers.material_recommendation
 
 #this element will contain all our other elements 
 app.layout = Layout

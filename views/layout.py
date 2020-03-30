@@ -180,6 +180,7 @@ Layout = html.Div([
     html.H1("NCAMP Table"),
     html.H3("Select a Material"),
     material_dropdown,
+    html.P(id = "material-recommendation"),
     material_table,
     html.H3("Select a Filter"),
     property_filters, 
