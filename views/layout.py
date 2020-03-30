@@ -175,12 +175,28 @@ property_filters = html.Div(
         ]
 )
 
+material_recommendation = html.P(
+    id = "material-recommendation",
+    style = {
+         'color': '#007bff', 
+         'margin-top': '10px',
+         'font-style': 'italic',
+         'font-size': 'small',
+    #     "border-style": "solid", 
+    #     "border-width": "1px", 
+    #     "display" : "inline-block",
+    #     "margin" : "2px", 
+    #     "padding" : "2px", 
+    #     "background-color" : "#EEF4FF"
+    }
+)
+
 #this element will contain all our other elements 
 Layout = html.Div([
     html.H1("NCAMP Table"),
     html.H3("Select a Material"),
     material_dropdown,
-    html.P(id = "material-recommendation"),
+    material_recommendation,
     material_table,
     html.H3("Select a Filter"),
     property_filters, 

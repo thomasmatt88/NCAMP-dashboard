@@ -17,8 +17,6 @@ def return_material_recommendation(value):
     value = [] if value is None else value
     
     if len(value) == 1 and value[0] != "all":
-        print(mdf["Material"][value[0]])
-        print(value[0])
-        return similar_material(mdf["Material"][value[0]])
+        return "You may also be interested in {}.".format(similar_material(mdf["Material"][value[0]]))
 
-    return str(value)
+    return ""
