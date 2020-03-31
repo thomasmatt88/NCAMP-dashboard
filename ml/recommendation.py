@@ -26,8 +26,18 @@ def similar_material(material):
     global df5 
     df = df5
     df["Euclidean Distance"] = np.nan
+
+    print(df5.loc[material].dropna())
+    print(df5.loc[material].dropna().index)
+    print(df[df5.loc[material].dropna().index])
+
+    # remove columns of df5 with empty values for 'material'
+    df5 = df5[df5.loc[material].dropna().index]
     for index in df.index:
-        df["Euclidean Distance"][index] = np.linalg.norm(df5.fillna(0).loc[material, :].values -
+        # np.lingalg.norm calculates l2 norm/ED by default
+        # default 'ord' is 2
+        df["Euclidean Distance"][index] = np.linalg.norm(df5.loc[material, :].values -
+                                          # fill empty cells with zero
                                           df5.fillna(0).loc[index, :].values)
     
     
