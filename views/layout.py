@@ -182,12 +182,6 @@ material_recommendation = html.P(
          'margin-top': '10px',
          'font-style': 'italic',
          'font-size': 'small',
-    #     "border-style": "solid", 
-    #     "border-width": "1px", 
-    #     "display" : "inline-block",
-    #     "margin" : "2px", 
-    #     "padding" : "2px", 
-    #     "background-color" : "#EEF4FF"
     }
 )
 

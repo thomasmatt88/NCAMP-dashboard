@@ -9,7 +9,7 @@ from data import material_links, process_spec_links, material_spec_links
 #db_connection = create_engine(db_connection_str)
 
 #mdf = pd.read_sql('SELECT * FROM material', con=db_connection)
-mdf = pd.read_pickle('data/material.pickle')
+mdf = pd.read_pickle('data/material.pickle').drop(columns = ["Form"])
 #df1 = pd.read_sql('SELECT * FROM material_properties', con=db_connection)
 df1 = pd.read_pickle('data/material_properties.pickle')
 #df2 = pd.read_sql('SELECT * FROM test_conditions', con=db_connection)

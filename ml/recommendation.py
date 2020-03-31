@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-df = pd.read_pickle('data/material.pickle')
+df = pd.read_pickle('data/material.pickle').drop(columns = ["Form"])
 df1 = pd.read_pickle('data/material_properties.pickle')
 df2 = pd.read_pickle('data/test_conditions.pickle')
 
