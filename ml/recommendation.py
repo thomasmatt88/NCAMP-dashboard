@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 
 df = pd.read_pickle('data/material.pickle').drop(columns = ["Form"])
+form_df = pd.read_pickle('data/material.pickle').set_index("Material")["Form"]
 df1 = pd.read_pickle('data/material_properties.pickle')
 df2 = pd.read_pickle('data/test_conditions.pickle')
 
@@ -29,9 +30,14 @@ def similar_material(material):
         df["Euclidean Distance"][index] = np.linalg.norm(df5.fillna(0).loc[material, :].values -
                                           df5.fillna(0).loc[index, :].values)
     
+    
+    # only recommend materials of the same 'form'
+    global form_df
+    final_df = pd.merge(df, form_df, how = 'inner', left_on = 'Material', right_on = 'Material')
+    
     # sort df by ED and choose index
     # corresponding to min ED other that material
-    similar_material = df.sort_values(by = ["Euclidean Distance"]).index[1]
+    similar_material = final_df.sort_values(by = ["Euclidean Distance"]).index[1]
     return similar_material
 
 #print(similar_material("6781 S-2/MTM45-1 8-harness satin weave fabric"))
