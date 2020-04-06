@@ -1,0 +1,15 @@
+.unfocused.dash-cell-value.cell-markdown {
+    /*font-size: small;*/
+    font-family: monospace;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+.unfocused.dash-cell-value.cell-markdown p{
+    text-align: right;
+    vertical-align: middle;
+    margin: 0 0 0 0;
+    padding: 2px;
+    font-family: monospace;
+    font-size: 15px;
+}
