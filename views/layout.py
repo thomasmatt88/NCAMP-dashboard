@@ -56,7 +56,12 @@ material_table = dash_table.DataTable(
             "margin-left": 'auto',
             "margin-right": 'auto'
         },
-        tooltip={'Material': 'this is a test tooltip' }
+        tooltip={
+            'MOT': 'MOT: Maximum Operating Temperature',
+            'Tg': 'Tg: Glass Transition Temperature',
+            'WetTg': 'WetTg: Wet Glass Transition Temperature',
+            'FAW': 'FAW: Fiber Areal Weight'
+        }
 )
 
 property_table = dash_table.DataTable(
@@ -96,7 +101,17 @@ property_table = dash_table.DataTable(
         
         sort_action = 'custom',
         sort_mode = 'single',
-        sort_by = []
+        sort_by = [],
+        tooltip={
+            'F1tu': 'F1tu: ultimate tensile strength, longitudinal / warp direction',
+            'F2tu': 'F2tu: ultimate tensile strength, transverse / fill direction',
+            'E1t': 'E1t: tensile modulus, longitudinal / warp direction',
+            'F1cu': 'F1cu: ultimate compressive strength, longitudinal / warp direction',
+            'F2cu': 'F2cu: ultimate compressive strength, transverse / fill direction',
+            'F12su': 'F12su: ultimate in-plane shear strength',
+            'F31sbs': 'F31sbs: short beam strength',
+            'CPT': 'CPT: Cured Ply Thickness',
+        }
 )
 
 test_conditions_checklist = dcc.Checklist(
