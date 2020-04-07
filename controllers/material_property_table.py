@@ -12,6 +12,7 @@ from models.Dataframe import PropertyDF, MaterialDF
     [
         Input('test-condition-checklist', 'value'),
         Input('material-property-table', 'sort_by'),
+        Input('predict-toggle-switch', 'value'),
         Input('material-dropdown', 'value'),
         Input('property-dropdown', 'value'),
         Input('physical-property-dropdown', 'value'),
@@ -25,7 +26,7 @@ from models.Dataframe import PropertyDF, MaterialDF
 )
 
 def update_material_property_table(
-    test_condition_value, sort_by, material_value, properties_to_filter, \
+    test_condition_value, sort_by, predict, material_value, properties_to_filter, \
     physical_properties_to_filter, MOT_range, Tg_range, WetTg_range, FAW_range, *args):
     #property_range_value_F1tu, property_range_value_F2tu, property_range_value_E1t, property_range_value_F1cu):
     # convert range slider values into dictionary for property filtering
@@ -46,10 +47,15 @@ def update_material_property_table(
     properties_to_filter = [] if properties_to_filter is None else properties_to_filter
     physical_properties_to_filter = [] if physical_properties_to_filter is None else physical_properties_to_filter
     material_value = [] if material_value is None else material_value
+    predict = False if predict is None else predict
 
-    #sort dataframe
-    #dff = property_df.sort_dataframe(sort_by)
-    dff = property_df_impute.sort_dataframe(sort_by)
+    #sort dataframe and choose whether to show predicted material properties or not
+    print("PREDICT", predict)
+    if predict:
+        dff = property_df_impute.sort_dataframe(sort_by)
+    else:
+        dff = property_df.sort_dataframe(sort_by)
+    
 
     mdff = material_df_links
     # filter material_df_links by physical property range

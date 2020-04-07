@@ -2,6 +2,8 @@ import dash_html_components as html
 import dash_core_components as dcc
 import dash_table
 import dash_bootstrap_components as dbc
+import dash_daq as daq
+
 from dataframe import material_df, property_df
 import views.property_filter_modals
 from models.Dataframe import PropertyDF, MaterialDF
@@ -283,5 +285,10 @@ Layout = html.Div([
     html.H3("Select a Filter"),
     property_filters, 
     html.Div(id = "filter-selections-container"), # need to reference id for callback
+    daq.ToggleSwitch(
+        id='predict-toggle-switch',
+        label = 'Show predicted material properties?',
+        labelPosition = 'bottom'
+    ),
     property_table
 ])
