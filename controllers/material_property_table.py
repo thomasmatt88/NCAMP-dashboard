@@ -48,8 +48,8 @@ def update_material_property_table(
     material_value = [] if material_value is None else material_value
 
     #sort dataframe
-    dff = property_df.sort_dataframe(sort_by)
-    #dff = property_df_impute.sort_dataframe(sort_by)
+    #dff = property_df.sort_dataframe(sort_by)
+    dff = property_df_impute.sort_dataframe(sort_by)
 
     mdff = material_df_links
     # filter material_df_links by physical property range
