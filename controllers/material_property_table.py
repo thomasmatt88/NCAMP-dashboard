@@ -2,7 +2,7 @@ import dash
 from dash.dependencies import Input, Output, State
 
 #from other modules
-from dataframe import property_df, material_df_links
+from dataframe import property_df, property_df_impute, material_df_links
 from app import app
 from views.layout import Layout
 from models.Dataframe import PropertyDF, MaterialDF
@@ -49,6 +49,7 @@ def update_material_property_table(
 
     #sort dataframe
     dff = property_df.sort_dataframe(sort_by)
+    #dff = property_df_impute.sort_dataframe(sort_by)
 
     mdff = material_df_links
     # filter material_df_links by physical property range
