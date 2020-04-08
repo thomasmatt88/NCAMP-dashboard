@@ -11,8 +11,28 @@ from data import material_links, process_spec_links, material_spec_links
 #mdf = pd.read_sql('SELECT * FROM material', con=db_connection)
 mdf = pd.read_pickle('data/material.pickle').drop(columns = ["Form"])
 #df1 = pd.read_sql('SELECT * FROM material_properties', con=db_connection)
-df1 = pd.read_pickle('data/material_properties.pickle')#####
+df1 = pd.read_pickle('data/material_properties.pickle') #####
 df1_impute = pd.read_pickle('data/material_properties_impute.pickle')
+
+#round dfs
+mdf = mdf.round(0)
+df1["F1tu"] = df1["F1tu"].round(2)
+df1_impute["F1tu"] = df1_impute["F1tu"].round(2)
+df1["F2tu"] = df1["F2tu"].round(2)
+df1_impute["F2tu"] = df1_impute["F2tu"].round(2)
+df1["E1t"] = df1["E1t"].round(2)
+df1_impute["E1t"] = df1_impute["E1t"].round(2)
+df1["F1cu"] = df1["F1cu"].round(2)
+df1_impute["F1cu"] = df1_impute["F1cu"].round(2)
+df1["F2cu"] = df1["F2cu"].round(2)
+df1_impute["F2cu"] = df1_impute["F2cu"].round(2)
+df1["F12su"] = df1["F12su"].round(2)
+df1_impute["F12su"] = df1_impute["F12su"].round(2)
+df1["F31sbs"] = df1["F31sbs"].round(2)
+df1_impute["F31sbs"] = df1_impute["F31sbs"].round(2)
+df1["CPT"] = df1["CPT"].round(4)
+df1_impute["CPT"] = df1_impute["CPT"].round(4)
+
 #df2 = pd.read_sql('SELECT * FROM test_conditions', con=db_connection)
 df2 = pd.read_pickle('data/test_conditions.pickle')
 df3 = pd.merge(df1, df2, how = 'inner', left_on = 'test_conditions_id', right_on = 'id')
