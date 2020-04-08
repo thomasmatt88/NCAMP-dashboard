@@ -110,7 +110,7 @@ property_table = dash_table.DataTable(
                     'column_id': x[1],
                     'filter_query': '{Material}' + ' eq "' + str(x[0]) + '"' + ' && {Test Temperature} eq ' + str(x[2]) + ' && {Test Environment} eq "' + str(x[3]) + '"'
                 },
-                'color': 'red'
+                'color': 'purple'
             } for x in [
                 ("[HTS40 E13 3k/MTM45-1 plain weave fabric](https://www.wichita.edu/research/NIAR/Research/cytec-mtm45-1/3K-PW-G30-500-Fabric-2.pdf)", "E1t", 250, "wet"),
                 ("[Hexcel AS4 3k/8552 plain weave](https://www.wichita.edu/research/NIAR/Research/hexcel-8552/AS4-PW-2.pdf)", "F1tu", 250, "dry"),
@@ -287,7 +287,15 @@ Layout = html.Div([
     html.Div(id = "filter-selections-container"), # need to reference id for callback
     daq.ToggleSwitch(
         id='predict-toggle-switch',
-        label = 'Show predicted material properties?',
+        label = {
+            'label' : 'Show predicted material properties?',
+            'style'  : {
+                'color' : 'purple'
+            }
+        },
+        style = {
+            #'float': 'left'
+        },
         labelPosition = 'bottom'
     ),
     property_table
