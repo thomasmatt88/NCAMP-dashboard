@@ -58,6 +58,17 @@ material_table = dash_table.DataTable(
             "margin-left": 'auto',
             "margin-right": 'auto'
         },
+        style_cell_conditional = [
+            {
+                'if': {'column_id': 'Fiber'},
+                'maxWidth': '200px'
+            }
+        ],
+        #handle overflow
+        style_data = {
+            'whiteSpace': 'normal',
+            'height': 'auto'
+        },
         tooltip={
             'MOT': 'MOT: Maximum Operating Temperature',
             'Tg': 'Tg: Glass Transition Temperature',
