@@ -59,8 +59,10 @@ def toggle_property_range_modal_phys(n1, *args):
 #all properties with '°F' as units
 def phys_update_range_output(value):
     return 'You have selected between {} °F and {} °F'.format(value[0], value[1])
+
 for key, value in MaterialDF.PROPERTIES.items():
-    if key == 4:
+    #FAW (PROPERTIES = 3) does not have °F as units
+    if key == 3:
         continue
     app.callback(
         Output('output-container-range-slider-' + value, 'children'),
@@ -68,10 +70,9 @@ for key, value in MaterialDF.PROPERTIES.items():
             Input('my-range-slider-' + value, 'value')
         ]
     )(phys_update_range_output)
-
 #FAW
 @app.callback(
     Output('output-container-range-slider-FAW', 'children'),
     [Input('my-range-slider-FAW', 'value')])
-def update_range_output_Tg(value):
+def update_range_output_FAW(value):
     return 'You have selected between {} g/m\N{SUPERSCRIPT TWO} and {} g/m\N{SUPERSCRIPT TWO}'.format(value[0], value[1])

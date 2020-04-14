@@ -43,8 +43,7 @@ material_table = dash_table.DataTable(
             {"name": ["Resin", ""], "id": "Resin"},
             {"name": [MaterialDF.PROPERTIES[1], "°F"], "id": MaterialDF.PROPERTIES[1]},
             {"name": [MaterialDF.PROPERTIES[2], "°F"], "id": MaterialDF.PROPERTIES[2]},
-            {"name": [MaterialDF.PROPERTIES[3], "°F"], "id": MaterialDF.PROPERTIES[3]},
-            {"name": [MaterialDF.PROPERTIES[4], "g/m\N{SUPERSCRIPT TWO}"], "id": MaterialDF.PROPERTIES[4]},
+            {"name": [MaterialDF.PROPERTIES[3], "g/m\N{SUPERSCRIPT TWO}"], "id": MaterialDF.PROPERTIES[3]},
             {"name": ["MaterialSpec", ""], "id": "MaterialSpec", "type" : 'text', "presentation" : 'markdown'},
             {"name": ["ProcessSpec", ""], "id": "ProcessSpec", "type" : 'text', "presentation" : 'markdown'}
         ], 

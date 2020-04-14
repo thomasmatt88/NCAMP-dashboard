@@ -39,7 +39,7 @@ class PropertyDF(pd.DataFrame):
 
 class MaterialDF(pd.DataFrame):
     
-    PROPERTIES = {1: 'MOT', 2: 'Tg', 3: 'WetTg', 4: 'FAW'}
+    PROPERTIES = {1: 'Tg', 2: 'WetTg', 3: 'FAW'}
 
     @property
     def _constructor(self):

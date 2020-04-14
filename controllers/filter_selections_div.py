@@ -20,7 +20,6 @@ dropdown_previous_state = []
         Input('my-range-slider-' + MaterialDF.PROPERTIES[1], 'value'),
         Input('my-range-slider-' + MaterialDF.PROPERTIES[2], 'value'),
         Input('my-range-slider-' + MaterialDF.PROPERTIES[3], 'value'),
-        Input('my-range-slider-' + MaterialDF.PROPERTIES[4], 'value'),
         *[Input("my-range-slider-" + PropertyDF.PROPERTIES[key], 'value') \
         for key, value in PropertyDF.PROPERTIES.items()],
     ]
