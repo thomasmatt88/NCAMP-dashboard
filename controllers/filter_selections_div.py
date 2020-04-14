@@ -65,4 +65,4 @@ def toggle_property_range_modal_phys(n1, n2, n3, n4, n5, n6, *args):
         *test_conds_html,
         *mech_props_html,
         *phys_props_html
-    ], style = {"margin-top" : "35px"})
+    ], style = {"margin-top" : "20px", "margin-bottom" : "20px"})
