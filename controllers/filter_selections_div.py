@@ -24,12 +24,12 @@ dropdown_previous_state = []
         for key, value in PropertyDF.PROPERTIES.items()],
     ]
 )
-def toggle_property_range_modal_phys(n1, n2, n3, n4, n5, n6, n7, *args):
+def toggle_property_range_modal_phys(n1, n2, n3, n4, n5, n6, *args):
     n1 = [] if n1 is None else n1
     n2 = [] if n2 is None else n2
     n3 = [] if n3 is None else n3
     
-    phys_props_ranges = [n4, n5, n6, n7]
+    phys_props_ranges = [n4, n5, n6]
     mech_props_ranges = [None]*len(args)
     for i, parameter in enumerate(args):
         mech_props_ranges[i] = parameter

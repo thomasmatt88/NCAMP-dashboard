@@ -26,7 +26,7 @@ from models.Dataframe import PropertyDF, MaterialDF
 
 def update_material_property_table(
     test_condition_value, sort_by, predict, material_value, properties_to_filter, \
-    physical_properties_to_filter, MOT_range, Tg_range, WetTg_range, FAW_range, *args):
+    physical_properties_to_filter, Tg_range, WetTg_range, FAW_range, *args):
     #property_range_value_F1tu, property_range_value_F2tu, property_range_value_E1t, property_range_value_F1cu):
     # convert range slider values into dictionary for property filtering
     ranges = {}
@@ -37,10 +37,9 @@ def update_material_property_table(
 
     # convert phys range slider values into dictionary for physcial property filtering
     phys_ranges = {}
-    phys_ranges[1] = MOT_range
-    phys_ranges[2] = Tg_range
-    phys_ranges[3] = WetTg_range
-    phys_ranges[4] = FAW_range
+    phys_ranges[1] = Tg_range
+    phys_ranges[2] = WetTg_range
+    phys_ranges[3] = FAW_range
 
     # NoneType is difficult to process
     properties_to_filter = [] if properties_to_filter is None else properties_to_filter
