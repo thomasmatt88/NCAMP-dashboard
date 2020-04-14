@@ -27,10 +27,6 @@ def similar_material(material):
     df = df5
     df["Euclidean Distance"] = np.nan
 
-    print(df5.loc[material].dropna())
-    print(df5.loc[material].dropna().index)
-    print(df[df5.loc[material].dropna().index])
-
     # remove columns of df5 with empty values for 'material'
     df5 = df5[df5.loc[material].dropna().index]
     for index in df.index:

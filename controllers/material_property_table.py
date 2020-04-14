@@ -50,7 +50,6 @@ def update_material_property_table(
     predict = False if predict is None else predict
 
     #sort dataframe and choose whether to show predicted material properties or not
-    print("PREDICT", predict)
     if predict:
         dff = property_df_impute.sort_dataframe(sort_by)
     else:

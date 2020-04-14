@@ -7,6 +7,7 @@ import dash_daq as daq
 from dataframe import material_df, property_df
 import views.property_filter_modals
 from models.Dataframe import PropertyDF, MaterialDF
+from data.predicted_mat_props import list_of_predicted_props
 
 material_dropdown = dcc.Dropdown(
         id = 'material-dropdown', #need to reference for callback
@@ -104,6 +105,7 @@ property_table = dash_table.DataTable(
                 'maxWidth': '90px'
             }
         ],
+        # style cells differently that contain 'predicted' material properties
         style_data_conditional = [
             {
                 'if': {
@@ -111,68 +113,7 @@ property_table = dash_table.DataTable(
                     'filter_query': '{Material}' + ' eq "' + str(x[0]) + '"' + ' && {Test Temperature} eq ' + str(x[2]) + ' && {Test Environment} eq "' + str(x[3]) + '"'
                 },
                 'color': 'purple'
-            } for x in [
-                ("[HTS40 E13 3k/MTM45-1 plain weave fabric](https://www.wichita.edu/research/NIAR/Research/cytec-mtm45-1/3K-PW-G30-500-Fabric-2.pdf)", "E1t", 250, "wet"),
-                ("[Hexcel AS4 3k/8552 plain weave](https://www.wichita.edu/research/NIAR/Research/hexcel-8552/AS4-PW-2.pdf)", "F1tu", 250, "dry"),
-                ("[Hexcel AS4 3k/8552 plain weave](https://www.wichita.edu/research/NIAR/Research/hexcel-8552/AS4-PW-2.pdf)", "F2tu", 250, "dry"),
-                ("[Hexcel AS4 3k/8552 plain weave](https://www.wichita.edu/research/NIAR/Research/hexcel-8552/AS4-PW-2.pdf)", "E1t", 250, "dry"),
-                ("[Hexcel AS4 3k/8552 plain weave](https://www.wichita.edu/research/NIAR/Research/hexcel-8552/AS4-PW-2.pdf)", "F12su", 250, "dry"),
-                ("[Cytec 5320-1 T650 Unitape Gr 145 RC 33%](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-Unitape-2.pdf)", "F1tu", 250, "dry"),
-                ("[Cytec 5320-1 T650 Unitape Gr 145 RC 33%](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-Unitape-2.pdf)", "F2tu", 250, "dry"),
-                ("[Cytec 5320-1 T650 Unitape Gr 145 RC 33%](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-Unitape-2.pdf)", "E1t", 250, "dry"),
-                ("[Cytec 5320-1 T650 Unitape Gr 145 RC 33%](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-Unitape-2.pdf)", "F12su", 250, "dry"),
-                ("[Cytec 5320-1 T650 3k-PW fabric](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-3k-PW-2.pdf)", "F1tu", 250, "dry"),
-                ("[Cytec 5320-1 T650 3k-PW fabric](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-3k-PW-2.pdf)", "F2tu", 250, "dry"),
-                ("[Cytec 5320-1 T650 3k-PW fabric](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-3k-PW-2.pdf)", "E1t", 250, "dry"),
-                ("[Cytec 5320-1 T650 3k-PW fabric](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-3k-PW-2.pdf)", "F12su", 250, "dry"),               
-                ("[Newport MR60H/ NCT4708 unidirectional tape](https://www.wichita.edu/research/NIAR/Research/newport-nct4708/4708-Unitape-2.pdf)", "F2tu", 180, "dry"),
-                ("[Newport MR60H/ NCT4708 unidirectional tape](https://www.wichita.edu/research/NIAR/Research/newport-nct4708/4708-Unitape-2.pdf)", "F2cu", 180, "dry"),
-                ("[Cytec 5320-1 T650 Unitape Gr 145 RC 33%](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-Unitape-2.pdf)", "F1tu", 180, "dry"),
-                ("[Cytec 5320-1 T650 Unitape Gr 145 RC 33%](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-Unitape-2.pdf)", "F2tu", 180, "dry"),
-                ("[Cytec 5320-1 T650 Unitape Gr 145 RC 33%](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-Unitape-2.pdf)", "E1t", 180, "dry"),
-                ("[Cytec 5320-1 T650 Unitape Gr 145 RC 33%](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-Unitape-2.pdf)", "F12su", 180, "dry"),
-                ("[Cytec 5320-1 T650 3k-PW fabric](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-3k-PW-2.pdf)", "F1tu", 180, "dry"),
-                ("[Cytec 5320-1 T650 3k-PW fabric](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-3k-PW-2.pdf)", "F2tu", 180, "dry"),
-                ("[Cytec 5320-1 T650 3k-PW fabric](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-3k-PW-2.pdf)", "E1t", 180, "dry"),
-                ("[Cytec 5320-1 T650 3k-PW fabric](https://www.wichita.edu/research/NIAR/Research/cytec-5320-1/T650-3k-PW-2.pdf)", "F12su", 180, "dry"),
-                ("[EP2202 IM7G Unitape Gr 190 RC 33%](https://www.wichita.edu/research/NIAR/Research/cytec-ep2202/IM7G-Unitape-2.pdf)", "F1tu", 180, "dry"),
-                ("[EP2202 IM7G Unitape Gr 190 RC 33%](https://www.wichita.edu/research/NIAR/Research/cytec-ep2202/IM7G-Unitape-2.pdf)", "F2tu", 180, "dry"),
-                ("[EP2202 IM7G Unitape Gr 190 RC 33%](https://www.wichita.edu/research/NIAR/Research/cytec-ep2202/IM7G-Unitape-2.pdf)", "E1t", 180, "dry"),
-                ("[EP2202 IM7G Unitape Gr 190 RC 33%](https://www.wichita.edu/research/NIAR/Research/cytec-ep2202/IM7G-Unitape-2.pdf)", "F12su", 180, "dry"),
-                ("[Cytec Cycom EP2202 T650 3k-PW fabric with RC 38%](https://www.wichita.edu/research/NIAR/Research/cytec-ep2202/T650-3k-70-PW-2.pdf)", "F1tu", 180, "dry"),
-                ("[Cytec Cycom EP2202 T650 3k-PW fabric with RC 38%](https://www.wichita.edu/research/NIAR/Research/cytec-ep2202/T650-3k-70-PW-2.pdf)", "F2tu", 180, "dry"),
-                ("[Cytec Cycom EP2202 T650 3k-PW fabric with RC 38%](https://www.wichita.edu/research/NIAR/Research/cytec-ep2202/T650-3k-70-PW-2.pdf)", "E1t", 180, "dry"),
-                ("[Cytec Cycom EP2202 T650 3k-PW fabric with RC 38%](https://www.wichita.edu/research/NIAR/Research/cytec-ep2202/T650-3k-70-PW-2.pdf)", "F12su", 180, "dry"),
-                ("[TenCate BT250E-6 S2 Unitape Gr 284gsm 33% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/TenCate-BT250E-6-S2-Unitape-284-gsm-33-RC-Qualification-Material-Property-Data-Report.pdf)", "F1tu", 180, "dry"),
-                ("[TenCate BT250E-6 S2 Unitape Gr 284gsm 33% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/TenCate-BT250E-6-S2-Unitape-284-gsm-33-RC-Qualification-Material-Property-Data-Report.pdf)", "F2tu", 180, "dry"),
-                ("[TenCate BT250E-6 S2 Unitape Gr 284gsm 33% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/TenCate-BT250E-6-S2-Unitape-284-gsm-33-RC-Qualification-Material-Property-Data-Report.pdf)", "E1t", 180, "dry"),
-                ("[TenCate BT250E-6 S2 Unitape Gr 284gsm 33% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/TenCate-BT250E-6-S2-Unitape-284-gsm-33-RC-Qualification-Material-Property-Data-Report.pdf)", "F2cu", 180, "dry"),
-                ("[TenCate BT250E-6 S2 Unitape Gr 284gsm 33% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/TenCate-BT250E-6-S2-Unitape-284-gsm-33-RC-Qualification-Material-Property-Data-Report.pdf)", "F12su", 180, "dry"),
-                ("[TenCate BT250E-6 IM7 GP 12k Unitape Gr 148gsm 33% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/CAM-RP-2015-038-Rev-NC-TenCate-BT250E-6-IM7-GP-Unitape-MPDR-10.25.2017.pdf)", "F1tu", 180, "dry"),
-                ("[TenCate BT250E-6 IM7 GP 12k Unitape Gr 148gsm 33% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/CAM-RP-2015-038-Rev-NC-TenCate-BT250E-6-IM7-GP-Unitape-MPDR-10.25.2017.pdf)", "F2tu", 180, "dry"),
-                ("[TenCate BT250E-6 IM7 GP 12k Unitape Gr 148gsm 33% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/CAM-RP-2015-038-Rev-NC-TenCate-BT250E-6-IM7-GP-Unitape-MPDR-10.25.2017.pdf)", "E1t", 180, "dry"),
-                ("[TenCate BT250E-6 IM7 GP 12k Unitape Gr 148gsm 33% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/CAM-RP-2015-038-Rev-NC-TenCate-BT250E-6-IM7-GP-Unitape-MPDR-10.25.2017.pdf)", "F2cu", 180, "dry"),
-                ("[TenCate BT250E-6 IM7 GP 12k Unitape Gr 148gsm 33% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/CAM-RP-2015-038-Rev-NC-TenCate-BT250E-6-IM7-GP-Unitape-MPDR-10.25.2017.pdf)", "F12su", 180, "dry"),
-                ("[TenCate BT250E-6 AS4C 3k-PW Fabric 195gsm 40% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/CAM-RP-2015-039-Rev-NC-TenCate-BT250E-6-AS4C-PW-MPDR-10.24.2017.pdf)", "F1tu", 180, "dry"),
-                ("[TenCate BT250E-6 AS4C 3k-PW Fabric 195gsm 40% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/CAM-RP-2015-039-Rev-NC-TenCate-BT250E-6-AS4C-PW-MPDR-10.24.2017.pdf)", "F2tu", 180, "dry"),
-                ("[TenCate BT250E-6 AS4C 3k-PW Fabric 195gsm 40% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/CAM-RP-2015-039-Rev-NC-TenCate-BT250E-6-AS4C-PW-MPDR-10.24.2017.pdf)", "E1t", 180, "dry"),
-                ("[TenCate BT250E-6 AS4C 3k-PW Fabric 195gsm 40% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/CAM-RP-2015-039-Rev-NC-TenCate-BT250E-6-AS4C-PW-MPDR-10.24.2017.pdf)", "F1cu", 180, "dry"),
-                ("[TenCate BT250E-6 AS4C 3k-PW Fabric 195gsm 40% RC](https://www.wichita.edu/research/NIAR/Research/tencate-bt250e-6/CAM-RP-2015-039-Rev-NC-TenCate-BT250E-6-AS4C-PW-MPDR-10.24.2017.pdf)", "F12su", 180, "dry"),
-                ("[TCAC12k HTS SFP OSI-TC250 42% fabric prepreg](https://www.wichita.edu/research/NIAR/Research/tencate-tc250/12k-HTS40-2.pdf)", "F1tu", 180, "dry"),
-                ("[TCAC12k HTS SFP OSI-TC250 42% fabric prepreg](https://www.wichita.edu/research/NIAR/Research/tencate-tc250/12k-HTS40-2.pdf)", "F2tu", 180, "dry"),
-                ("[TCAC12k HTS SFP OSI-TC250 42% fabric prepreg](https://www.wichita.edu/research/NIAR/Research/tencate-tc250/12k-HTS40-2.pdf)", "E1t", 180, "dry"),
-                ("[TCAC12k HTS SFP OSI-TC250 42% fabric prepreg](https://www.wichita.edu/research/NIAR/Research/tencate-tc250/12k-HTS40-2.pdf)", "F12su", 180, "dry"),
-                ("[Advanced Composites Group - MTM45-1 HTS(12K) Unitape](https://www.wichita.edu/research/NIAR/Research/cytec-mtm45-1/12K-HTS5631-Unidirectional-HTS40-2.pdf)", "F1tu", 200, "dry"),
-                ("[Advanced Composites Group - MTM45-1 HTS(12K) Unitape](https://www.wichita.edu/research/NIAR/Research/cytec-mtm45-1/12K-HTS5631-Unidirectional-HTS40-2.pdf)", "F2tu", 200, "dry"),
-                ("[Advanced Composites Group - MTM45-1 HTS(12K) Unitape](https://www.wichita.edu/research/NIAR/Research/cytec-mtm45-1/12K-HTS5631-Unidirectional-HTS40-2.pdf)", "E1t", 200, "dry"),
-                ("[Advanced Composites Group - MTM45-1 HTS(12K) Unitape](https://www.wichita.edu/research/NIAR/Research/cytec-mtm45-1/12K-HTS5631-Unidirectional-HTS40-2.pdf)", "F2cu", 200, "dry"),
-                ("[Advanced Composites Group - MTM45-1 HTS(12K) Unitape](https://www.wichita.edu/research/NIAR/Research/cytec-mtm45-1/12K-HTS5631-Unidirectional-HTS40-2.pdf)", "F12su", 200, "dry"),
-                ("[Advanced Composites Group - MTM45-1/IM7-145 gsm Unitape](https://www.wichita.edu/research/NIAR/Research/cytec-mtm45-1/CAM-RP-2008-007-Rev-B-ACG-IM7-Uni-3.28.2018-FINAL-MPDR.pdf)", "F1tu", 200, "dry"),
-                ("[Advanced Composites Group - MTM45-1/IM7-145 gsm Unitape](https://www.wichita.edu/research/NIAR/Research/cytec-mtm45-1/CAM-RP-2008-007-Rev-B-ACG-IM7-Uni-3.28.2018-FINAL-MPDR.pdf)", "F2tu", 200, "dry"),
-                ("[Advanced Composites Group - MTM45-1/IM7-145 gsm Unitape](https://www.wichita.edu/research/NIAR/Research/cytec-mtm45-1/CAM-RP-2008-007-Rev-B-ACG-IM7-Uni-3.28.2018-FINAL-MPDR.pdf)", "E1t", 200, "dry"),
-                ("[Advanced Composites Group - MTM45-1/IM7-145 gsm Unitape](https://www.wichita.edu/research/NIAR/Research/cytec-mtm45-1/CAM-RP-2008-007-Rev-B-ACG-IM7-Uni-3.28.2018-FINAL-MPDR.pdf)", "F2cu", 200, "dry"),
-                ("[Advanced Composites Group - MTM45-1/IM7-145 gsm Unitape](https://www.wichita.edu/research/NIAR/Research/cytec-mtm45-1/CAM-RP-2008-007-Rev-B-ACG-IM7-Uni-3.28.2018-FINAL-MPDR.pdf)", "F12su", 200, "dry"),
-            ]
+            } for x in list_of_predicted_props 
         ],
         sort_action = 'custom',
         sort_mode = 'single',
