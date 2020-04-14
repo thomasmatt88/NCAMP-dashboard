@@ -8,6 +8,7 @@ import controllers.material_table
 import controllers.filter_modals
 import controllers.filter_selections_div
 import controllers.material_recommendation
+import controllers.toggle_label
 
 #this element will contain all our other elements 
 app.layout = Layout

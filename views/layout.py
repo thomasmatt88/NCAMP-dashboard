@@ -215,6 +215,21 @@ material_recommendation = html.P(
     }
 )
 
+predicted_mat_prop_toggle = daq.ToggleSwitch(
+        id='predict-toggle-switch',
+        # label = {
+        #     'label' : 'Show predicted material properties?',
+        #     'style'  : {
+        #         'color' : 'purple'
+        #     }
+        # },
+        style = {
+            #'float': 'left'
+        },
+        labelPosition = 'bottom',
+        color = 'purple'
+    )
+
 #this element will contain all our other elements 
 Layout = html.Div([
     html.H1("NCAMP Table"),
@@ -225,18 +240,7 @@ Layout = html.Div([
     html.H3("Select a Filter"),
     property_filters, 
     html.Div(id = "filter-selections-container"), # need to reference id for callback
-    daq.ToggleSwitch(
-        id='predict-toggle-switch',
-        label = {
-            'label' : 'Show predicted material properties?',
-            'style'  : {
-                'color' : 'purple'
-            }
-        },
-        style = {
-            #'float': 'left'
-        },
-        labelPosition = 'bottom'
-    ),
+    predicted_mat_prop_toggle,
+    html.Div(id = 'toggle-switch-label', style =  {'color' : 'purple'}),
     property_table
 ])
