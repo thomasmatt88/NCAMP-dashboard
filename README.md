@@ -8,3 +8,9 @@ Select an NCAMP qualified material from the top dropdown. Tables will update bel
 <br/>
 <br/>
 ![select](https://user-images.githubusercontent.com/49013120/79288446-9e4ac980-7e7b-11ea-83af-52dd5fc91efe.gif)
+<br/>
+<br/>
+**2. Select all materials**<br/>
+<br/>
+<br/>
+![selectallmat](https://user-images.githubusercontent.com/49013120/79289371-e9fe7280-7e7d-11ea-820b-9612b68f4964.gif)
