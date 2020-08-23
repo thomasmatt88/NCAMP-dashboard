@@ -2,15 +2,16 @@ version: '3'
 
 services: 
     ncampapp:
-        build: .
+        build: ./ncampapp_container
+        container_name: ncampapp
         ports:
             - "8000:8000"
         network_mode: host
     
     nginx:
-        build: ./nginx
+        build: ./nginx_container
         container_name: nginx
         environment: 
-            - SERVER_NAME=0.0.0.0
+            - SERVER_NAME=0.0.0.0 # change to EC2 instance IP
         restart: always
         network_mode: host
