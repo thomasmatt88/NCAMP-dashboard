@@ -21,4 +21,5 @@ EXPOSE 8000
 #ENTRYPOINT [ "python3" ]
 #CMD ["index.py"]
 ENTRYPOINT [ "gunicorn" ]
-CMD ["app:server"]
+#CMD ["app:server"]
+CMD ["-b", "0.0.0.0:8000", "app:server"]
