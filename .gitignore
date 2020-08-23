@@ -3,3 +3,4 @@
 .vscode
 testdata
 READMELOCAL.txt
+*.pem
