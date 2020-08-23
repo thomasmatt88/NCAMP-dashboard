@@ -2,7 +2,7 @@ version: '3'
 
 services: 
     ncampapp:
-        build: ./ncampapp_container
+        build: .
         container_name: ncampapp
         ports:
             - "8000:8000"
