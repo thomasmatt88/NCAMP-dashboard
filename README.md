@@ -1,7 +1,7 @@
 # NCAMP-dashboard
 NCAMP, the National Center for Advanced Materials Performance, works with the FAA and industry partners to qualify material systems and populate a shared materials database that can be viewed publicly. This is a dashboard for viewing NCAMP materials database. 
 
-[NCAMP-dashboard](http://35.162.160.148/)
+[NCAMP-dashboard](http://52.89.8.121/)
 
 **1. Select a material**<br/>
 Select an NCAMP qualified material from the top dropdown. Tables will update below with metadata, physical properties, and mechanical properties of chosen material. If only one material is chosen, then a similar material will be recommended. Similarity is determined based off of minimum Euclidean Distance from selected material. 
