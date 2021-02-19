@@ -17,7 +17,7 @@ Select an NCAMP qualified material from the top dropdown. Tables will update bel
 <br/>
 <br/>
 **3. Show predicted material properties**<br/>
-We can infer unmeasured material properties using machine learning. Use toggle switch to show or not show these predicted material properties. 
+We can infer unmeasured material properties using machine learning, more specifically collaborative filtering / matrix factorization. Use toggle switch to show or not show these predicted material properties. 
 <br/>
 <br/>
 ![pred](https://user-images.githubusercontent.com/49013120/79289616-9e989400-7e7e-11ea-8a3e-45b6dd10dd26.gif)
